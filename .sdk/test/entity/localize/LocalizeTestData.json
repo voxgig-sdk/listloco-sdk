@@ -1,0 +1,61 @@
+{
+  "existing": {
+    "localize": {
+      "LOCALIZE00": {
+        "dictionary": {},
+        "gate": {},
+        "glossary": {},
+        "listing": {},
+        "localized": {},
+        "marketplace": "s69",
+        "pass": true,
+        "source_lang": "s6b",
+        "target_lang": "s6c",
+        "violation": [],
+        "id": "LOCALIZE00"
+      },
+      "LOCALIZE01": {
+        "dictionary": {},
+        "gate": {},
+        "glossary": {},
+        "listing": {},
+        "localized": {},
+        "marketplace": "scd",
+        "pass": true,
+        "source_lang": "scf",
+        "target_lang": "sd0",
+        "violation": [],
+        "id": "LOCALIZE01"
+      },
+      "LOCALIZE02": {
+        "dictionary": {},
+        "gate": {},
+        "glossary": {},
+        "listing": {},
+        "localized": {},
+        "marketplace": "s131",
+        "pass": true,
+        "source_lang": "s133",
+        "target_lang": "s134",
+        "violation": [],
+        "id": "LOCALIZE02"
+      }
+    }
+  },
+  "new": {
+    "localize": {
+      "localize_ref01": {
+        "dictionary": {},
+        "gate": {},
+        "glossary": {},
+        "listing": {},
+        "localized": {},
+        "marketplace": "s195",
+        "pass": true,
+        "source_lang": "s197",
+        "target_lang": "s198",
+        "violation": []
+      }
+    }
+  }
+}

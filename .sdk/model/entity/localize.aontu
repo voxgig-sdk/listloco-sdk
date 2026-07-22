@@ -1,0 +1,82 @@
+# Entity: localize
+
+main: kit: entity: localize: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "dictionary"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "gate"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "glossary"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "listing"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "localized"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "marketplace"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "pass"
+      req: true
+      type: "`$BOOLEAN`"
+    }
+    {
+      name: "source_lang"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "target_lang"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "violation"
+      req: true
+      type: "`$ARRAY`"
+    }
+  ]
+
+  name: "localize"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          method: "POST"
+          orig: "/localize"
+          parts: [
+            "localize"
+          ]
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

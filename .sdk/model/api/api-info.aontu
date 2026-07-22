@@ -1,0 +1,42 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        email: "sakai.work259601@gmail.com"
+      }
+      description: "The ListLoco API localizes e-commerce product listings into marketplace-compliant and glossary-consistent text, primarily for Amazon. It verifies each listing through a deterministic quality gate to ensure compliance and accuracy in translation, from English to German."
+      security: {
+        in: "header"
+        name: "Authorization"
+        prefix: "Bearer"
+        scheme: "BearerAuth"
+        type: "http"
+      }
+      servers: [
+        {
+          description: "Production server (direct/self-hosted)"
+          url: "https://listloco.hayasaka.app"
+        }
+        {
+          description: "RapidAPI server"
+          url: "https://{rapidApiHost}"
+          variables: {
+            rapidApiHost: {
+              default: "listloco.p.rapidapi.com"
+              description: "Your RapidAPI host from the dashboard"
+            }
+          }
+        }
+      ]
+      summary: "The ListLoco API localizes e-commerce product listings into marketplace-compliant and glossary-consistent text, primarily for Amazon."
+      termsOfService: "https://listloco.hayasaka.app/terms-of-service"
+      title: "ListLoco API"
+      version: "1.0.0"
+      website: "https://listloco.hayasaka.app/"
+    }
+  }
+}
+

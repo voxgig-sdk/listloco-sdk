@@ -1,0 +1,552 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "ListLoco API",
+    "description": "The ListLoco API localizes e-commerce product listings into marketplace-compliant and glossary-consistent text, primarily for Amazon. It verifies each listing through a deterministic quality gate to ensure compliance and accuracy in translation, from English to German.",
+    "version": "1.0.0",
+    "contact": {
+      "email": "sakai.work259601@gmail.com"
+    },
+    "termsOfService": "https://listloco.hayasaka.app/terms-of-service"
+  },
+  "servers": [
+    {
+      "url": "https://listloco.hayasaka.app",
+      "description": "Production server (direct/self-hosted)"
+    },
+    {
+      "url": "https://{rapidApiHost}",
+      "description": "RapidAPI server",
+      "variables": {
+        "rapidApiHost": {
+          "default": "listloco.p.rapidapi.com",
+          "description": "Your RapidAPI host from the dashboard"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/localize": {
+      "post": {
+        "summary": "Localize product listing",
+        "description": "Localizes an e-commerce product listing from English to German with marketplace compliance checks. The API applies Amazon DE compliance rules, enforces customer glossary terms, and runs deterministic quality gates including banned words detection, GPSR info verification, title length limits, model number preservation, and back-translation divergence checks.",
+        "operationId": "localizeListing",
+        "tags": [
+          "Localization"
+        ],
+        "security": [
+          {
+            "BearerAuth": []
+          },
+          {
+            "RapidAPIAuth": []
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LocalizeRequest"
+              },
+              "examples": {
+                "cordlessDrill": {
+                  "summary": "Cordless drill example",
+                  "value": {
+                    "marketplace": "amazon",
+                    "sourceLang": "en",
+                    "targetLang": "de",
+                    "listing": {
+                      "title": "Cordless drill AB-1200 with 8.5 kg battery and 2 m cable",
+                      "description": "Cordless drill AB-1200 with a 8.5 kg battery and a 2 m cable.",
+                      "brand": "Bosch",
+                      "material": "Metall",
+                      "size": "M",
+                      "color": "blue",
+                      "quantity": 1
+                    },
+                    "glossary": {
+                      "preserve": [
+                        "Bosch"
+                      ]
+                    },
+                    "dictionary": {
+                      "cordless": "kabellos",
+                      "drill": "Bohrmaschine",
+                      "with": "mit",
+                      "and": "und",
+                      "a": "ein",
+                      "battery": "Akku",
+                      "cable": "Kabel",
+                      "blue": "blau"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful localization with quality gate results",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LocalizeResponse"
+                },
+                "examples": {
+                  "successfulLocalization": {
+                    "summary": "Successful localization passing all gates",
+                    "value": {
+                      "localized": {
+                        "title": "kabellos Bohrmaschine AB-1200 mit 8.5 kg Akku und 2 m Kabel",
+                        "bullets": [
+                          "AB-1200 bürstenlos Bohrmaschine, 8.5 kg Akku",
+                          "2 m Kabel inklusive"
+                        ]
+                      },
+                      "gates": {
+                        "titleLength": {
+                          "pass": true
+                        },
+                        "bannedWords": {
+                          "pass": true
+                        },
+                        "requiredAttributes": {
+                          "pass": true
+                        },
+                        "preservation": {
+                          "pass": true
+                        },
+                        "glossary": {
+                          "pass": true
+                        },
+                        "backTranslation": {
+                          "pass": true
+                        }
+                      },
+                      "violations": [],
+                      "pass": true
+                    }
+                  },
+                  "failedGate": {
+                    "summary": "Failed quality gate with violations",
+                    "value": {
+                      "localized": {
+                        "title": "Bestseller kabellos Bohrmaschine garantiert mit Akku",
+                        "bullets": []
+                      },
+                      "gates": {
+                        "titleLength": {
+                          "pass": true
+                        },
+                        "bannedWords": {
+                          "pass": false
+                        },
+                        "requiredAttributes": {
+                          "pass": true
+                        },
+                        "preservation": {
+                          "pass": false
+                        },
+                        "glossary": {
+                          "pass": true
+                        },
+                        "backTranslation": {
+                          "pass": true
+                        }
+                      },
+                      "violations": [
+                        "Banned word detected: 'Bestseller'",
+                        "Banned word detected: 'garantiert'",
+                        "Model number 'AB-1200' not preserved",
+                        "Numeric value '8.5 kg' not preserved"
+                      ],
+                      "pass": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request - invalid input parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Invalid request",
+                  "message": "Missing required field: marketplace"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized - invalid or missing API key",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Unauthorized",
+                  "message": "Invalid API key"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Rate limit exceeded",
+                  "message": "Free tier limited to 5 requests per minute per IP"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                },
+                "example": {
+                  "error": "Internal server error",
+                  "message": "An unexpected error occurred"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Bearer token authentication for direct/self-hosted deployments. Use Authorization: Bearer <YOUR_API_KEY> header."
+      },
+      "RapidAPIAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-RapidAPI-Key",
+        "description": "RapidAPI key authentication. Requires both X-RapidAPI-Key and X-RapidAPI-Host headers."
+      }
+    },
+    "schemas": {
+      "LocalizeRequest": {
+        "type": "object",
+        "required": [
+          "marketplace",
+          "sourceLang",
+          "targetLang",
+          "listing"
+        ],
+        "properties": {
+          "marketplace": {
+            "type": "string",
+            "enum": [
+              "amazon"
+            ],
+            "description": "Target marketplace for compliance rules. Currently supports Amazon only.",
+            "example": "amazon"
+          },
+          "sourceLang": {
+            "type": "string",
+            "enum": [
+              "en"
+            ],
+            "description": "Source language code (ISO 639-1). Currently supports English only.",
+            "example": "en"
+          },
+          "targetLang": {
+            "type": "string",
+            "enum": [
+              "de"
+            ],
+            "description": "Target language code (ISO 639-1). Currently supports German only.",
+            "example": "de"
+          },
+          "listing": {
+            "type": "object",
+            "required": [
+              "title"
+            ],
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Product title to be localized",
+                "example": "Cordless drill AB-1200 with 8.5 kg battery and 2 m cable"
+              },
+              "description": {
+                "type": "string",
+                "description": "Product description to be localized",
+                "example": "Cordless drill AB-1200 with a 8.5 kg battery and a 2 m cable."
+              },
+              "brand": {
+                "type": "string",
+                "description": "Product brand name",
+                "example": "Bosch"
+              },
+              "material": {
+                "type": "string",
+                "description": "Product material",
+                "example": "Metall"
+              },
+              "size": {
+                "type": "string",
+                "description": "Product size",
+                "example": "M"
+              },
+              "color": {
+                "type": "string",
+                "description": "Product color",
+                "example": "blue"
+              },
+              "quantity": {
+                "type": "integer",
+                "description": "Product quantity",
+                "example": 1
+              },
+              "bullets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Product bullet points"
+              }
+            },
+            "description": "Product listing information to be localized"
+          },
+          "glossary": {
+            "type": "object",
+            "properties": {
+              "preserve": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Terms that must be preserved exactly during translation (e.g., brand names, model numbers)",
+                "example": [
+                  "Bosch"
+                ]
+              }
+            },
+            "description": "Customer glossary for enforcing brand terms and model numbers"
+          },
+          "dictionary": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Custom translation dictionary mapping source terms to target translations",
+            "example": {
+              "cordless": "kabellos",
+              "drill": "Bohrmaschine",
+              "with": "mit",
+              "and": "und",
+              "a": "ein",
+              "battery": "Akku",
+              "cable": "Kabel",
+              "blue": "blau"
+            }
+          }
+        }
+      },
+      "LocalizeResponse": {
+        "type": "object",
+        "required": [
+          "localized",
+          "gates",
+          "violations",
+          "pass"
+        ],
+        "properties": {
+          "localized": {
+            "type": "object",
+            "properties": {
+              "title": {
+                "type": "string",
+                "description": "Localized product title",
+                "example": "kabellos Bohrmaschine AB-1200 mit 8.5 kg Akku und 2 m Kabel"
+              },
+              "description": {
+                "type": "string",
+                "description": "Localized product description"
+              },
+              "bullets": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                },
+                "description": "Localized bullet points",
+                "example": [
+                  "AB-1200 bürstenlos Bohrmaschine, 8.5 kg Akku",
+                  "2 m Kabel inklusive"
+                ]
+              },
+              "brand": {
+                "type": "string",
+                "description": "Localized brand (if applicable)"
+              },
+              "material": {
+                "type": "string",
+                "description": "Localized material"
+              },
+              "size": {
+                "type": "string",
+                "description": "Localized size"
+              },
+              "color": {
+                "type": "string",
+                "description": "Localized color"
+              }
+            },
+            "description": "Localized listing content"
+          },
+          "gates": {
+            "type": "object",
+            "required": [
+              "titleLength",
+              "bannedWords",
+              "requiredAttributes",
+              "preservation",
+              "glossary",
+              "backTranslation"
+            ],
+            "properties": {
+              "titleLength": {
+                "type": "object",
+                "required": [
+                  "pass"
+                ],
+                "properties": {
+                  "pass": {
+                    "type": "boolean",
+                    "description": "Whether the title length is within Amazon DE character limits"
+                  }
+                },
+                "description": "Title character limit check"
+              },
+              "bannedWords": {
+                "type": "object",
+                "required": [
+                  "pass"
+                ],
+                "properties": {
+                  "pass": {
+                    "type": "boolean",
+                    "description": "Whether the listing contains any banned words (e.g., 'bestseller', 'garantiert')"
+                  }
+                },
+                "description": "Banned/prohibited words check"
+              },
+              "requiredAttributes": {
+                "type": "object",
+                "required": [
+                  "pass"
+                ],
+                "properties": {
+                  "pass": {
+                    "type": "boolean",
+                    "description": "Whether all required category attributes are present (e.g., GPSR info)"
+                  }
+                },
+                "description": "Required marketplace attributes check"
+              },
+              "preservation": {
+                "type": "object",
+                "required": [
+                  "pass"
+                ],
+                "properties": {
+                  "pass": {
+                    "type": "boolean",
+                    "description": "Whether model numbers, numeric values, and units are preserved exactly"
+                  }
+                },
+                "description": "Model number, numeral, and unit preservation check"
+              },
+              "glossary": {
+                "type": "object",
+                "required": [
+                  "pass"
+                ],
+                "properties": {
+                  "pass": {
+                    "type": "boolean",
+                    "description": "Whether glossary terms are preserved correctly"
+                  }
+                },
+                "description": "Glossary consistency check"
+              },
+              "backTranslation": {
+                "type": "object",
+                "required": [
+                  "pass"
+                ],
+                "properties": {
+                  "pass": {
+                    "type": "boolean",
+                    "description": "Whether back-translation divergence is within acceptable limits"
+                  }
+                },
+                "description": "Back-translation divergence check"
+              }
+            },
+            "description": "Deterministic quality gate results"
+          },
+          "violations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of compliance violations if any gate failed",
+            "example": []
+          },
+          "pass": {
+            "type": "boolean",
+            "description": "Overall pass/fail status - true if all gates passed, false if any gate failed",
+            "example": true
+          }
+        }
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "required": [
+          "error"
+        ],
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error type or category"
+          },
+          "message": {
+            "type": "string",
+            "description": "Detailed error message"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Localization",
+      "description": "Product listing localization and compliance verification operations"
+    }
+  ],
+  "externalDocs": {
+    "description": "Full API documentation and examples",
+    "url": "https://listloco.hayasaka.app/"
+  }
+}
