@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ ListlocoUtility.registrar = ->(u) {
   u.prepare_params = ListlocoUtilities::PrepareParams
   u.prepare_path = ListlocoUtilities::PreparePath
   u.prepare_query = ListlocoUtilities::PrepareQuery
+  u.graphql_body = ListlocoUtilities::GraphqlBody
+  u.graphql_errors = ListlocoUtilities::GraphqlErrors
   u.result_basic = ListlocoUtilities::ResultBasic
   u.result_body = ListlocoUtilities::ResultBody
   u.result_headers = ListlocoUtilities::ResultHeaders

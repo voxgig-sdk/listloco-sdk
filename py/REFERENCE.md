@@ -89,15 +89,15 @@ localize = client.Localize()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `dictionary` | `dict` | No |  |
-| `gate` | `dict` | Yes |  |
+| `gates` | `dict` | Yes |  |
 | `glossary` | `dict` | No |  |
 | `listing` | `dict` | Yes |  |
 | `localized` | `dict` | Yes |  |
 | `marketplace` | `str` | Yes |  |
 | `pass` | `bool` | Yes |  |
-| `source_lang` | `str` | Yes |  |
-| `target_lang` | `str` | Yes |  |
-| `violation` | `list` | Yes |  |
+| `sourceLang` | `str` | Yes |  |
+| `targetLang` | `str` | Yes |  |
+| `violations` | `list` | Yes |  |
 
 ### Operations
 
@@ -107,14 +107,14 @@ Create a new entity with the given data. Returns the created entity data and rai
 
 ```python
 result = client.Localize().create({
-    "gate": {},  # dict
+    "gates": {},  # dict
     "listing": {},  # dict
     "localized": {},  # dict
     "marketplace": "example_marketplace",  # str
     "pass": True,  # bool
-    "source_lang": "example_source_lang",  # str
-    "target_lang": "example_target_lang",  # str
-    "violation": [],  # list
+    "sourceLang": "example_sourceLang",  # str
+    "targetLang": "example_targetLang",  # str
+    "violations": [],  # list
 })
 ```
 

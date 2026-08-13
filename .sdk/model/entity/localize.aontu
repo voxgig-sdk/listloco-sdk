@@ -11,7 +11,7 @@ main: kit: entity: localize: {
       type: "`$OBJECT`"
     }
     {
-      name: "gate"
+      name: "gates"
       req: true
       type: "`$OBJECT`"
     }
@@ -41,17 +41,17 @@ main: kit: entity: localize: {
       type: "`$BOOLEAN`"
     }
     {
-      name: "source_lang"
+      name: "sourceLang"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "target_lang"
+      name: "targetLang"
       req: true
       type: "`$STRING`"
     }
     {
-      name: "violation"
+      name: "violations"
       req: true
       type: "`$ARRAY`"
     }

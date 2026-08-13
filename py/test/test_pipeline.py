@@ -16,11 +16,11 @@
 import pytest
 
 from listloco_sdk import ListlocoSDK
-from core.error import ListlocoError
-from core.result import ListlocoResult
-from core.response import ListlocoResponse
-from core.spec import ListlocoSpec
-from feature.base_feature import ListlocoBaseFeature
+from listloco_sdk.core.error import ListlocoError
+from listloco_sdk.core.result import ListlocoResult
+from listloco_sdk.core.response import ListlocoResponse
+from listloco_sdk.core.spec import ListlocoSpec
+from listloco_sdk.feature.base_feature import ListlocoBaseFeature
 
 
 def _client():

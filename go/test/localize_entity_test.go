@@ -58,7 +58,7 @@ func TestLocalizeEntity(t *testing.T) {
 		if err != nil {
 			t.Fatalf("create failed: %v", err)
 		}
-		localizeRef01Data = core.ToMapAny(localizeRef01DataResult)
+		localizeRef01Data = core.ToMapAny(entityData(localizeRef01DataResult))
 		if localizeRef01Data == nil {
 			t.Fatal("expected create result to be a map")
 		}

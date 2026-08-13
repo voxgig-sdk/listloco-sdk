@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Listloco SDK exists test
 
 import pytest
 from listloco_sdk import ListlocoSDK

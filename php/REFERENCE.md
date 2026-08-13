@@ -94,15 +94,15 @@ $localize = $client->Localize();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `dictionary` | `array` | No |  |
-| `gate` | `array` | Yes |  |
+| `gates` | `array` | Yes |  |
 | `glossary` | `array` | No |  |
 | `listing` | `array` | Yes |  |
 | `localized` | `array` | Yes |  |
 | `marketplace` | `string` | Yes |  |
 | `pass` | `bool` | Yes |  |
-| `source_lang` | `string` | Yes |  |
-| `target_lang` | `string` | Yes |  |
-| `violation` | `array` | Yes |  |
+| `sourceLang` | `string` | Yes |  |
+| `targetLang` | `string` | Yes |  |
+| `violations` | `array` | Yes |  |
 
 ### Operations
 
@@ -112,14 +112,14 @@ Create a new entity with the given data. Throws on error.
 
 ```php
 $result = $client->Localize()->create([
-  "gate" => null, // array
+  "gates" => null, // array
   "listing" => null, // array
   "localized" => null, // array
   "marketplace" => null, // string
   "pass" => null, // bool
-  "source_lang" => null, // string
-  "target_lang" => null, // string
-  "violation" => null, // array
+  "sourceLang" => null, // string
+  "targetLang" => null, // string
+  "violations" => null, // array
 ]);
 ```
 

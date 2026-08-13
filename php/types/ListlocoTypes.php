@@ -16,29 +16,29 @@ declare(strict_types=1);
 class Localize
 {
     public ?array $dictionary = null;
-    public array $gate;
+    public array $gates;
     public ?array $glossary = null;
     public array $listing;
     public array $localized;
     public string $marketplace;
     public bool $pass;
-    public string $source_lang;
-    public string $target_lang;
-    public array $violation;
+    public string $sourceLang;
+    public string $targetLang;
+    public array $violations;
 }
 
 /** Request payload for Localize#create. */
 class LocalizeCreateData
 {
     public ?array $dictionary = null;
-    public array $gate;
+    public array $gates;
     public ?array $glossary = null;
     public array $listing;
     public array $localized;
     public string $marketplace;
     public bool $pass;
-    public string $source_lang;
-    public string $target_lang;
-    public array $violation;
+    public string $sourceLang;
+    public string $targetLang;
+    public array $violations;
 }
 

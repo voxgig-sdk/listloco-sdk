@@ -41,7 +41,7 @@ describe("LocalizeEntity", function()
 
     local localize_ref01_data_result, err = localize_ref01_ent:create(localize_ref01_data, nil)
     assert.is_nil(err)
-    localize_ref01_data = helpers.to_map(localize_ref01_data_result)
+    localize_ref01_data = helpers.to_map(type(localize_ref01_data_result) == 'table' and localize_ref01_data_result.data_get and localize_ref01_data_result:data_get() or localize_ref01_data_result)
     assert.is_not_nil(localize_ref01_data)
 
   end)

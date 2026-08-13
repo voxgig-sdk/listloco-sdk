@@ -92,15 +92,15 @@ local localize = client:Localize(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `dictionary` | `table` | No |  |
-| `gate` | `table` | Yes |  |
+| `gates` | `table` | Yes |  |
 | `glossary` | `table` | No |  |
 | `listing` | `table` | Yes |  |
 | `localized` | `table` | Yes |  |
 | `marketplace` | `string` | Yes |  |
 | `pass` | `boolean` | Yes |  |
-| `source_lang` | `string` | Yes |  |
-| `target_lang` | `string` | Yes |  |
-| `violation` | `table` | Yes |  |
+| `sourceLang` | `string` | Yes |  |
+| `targetLang` | `string` | Yes |  |
+| `violations` | `table` | Yes |  |
 
 ### Operations
 
@@ -110,14 +110,14 @@ Create a new entity with the given data.
 
 ```lua
 local result, err = client:Localize():create({
-  gate = --[[ table ]],
+  gates = --[[ table ]],
   listing = --[[ table ]],
   localized = --[[ table ]],
   marketplace = --[[ string ]],
   pass = --[[ boolean ]],
-  source_lang = --[[ string ]],
-  target_lang = --[[ string ]],
-  violation = --[[ table ]],
+  sourceLang = --[[ string ]],
+  targetLang = --[[ string ]],
+  violations = --[[ table ]],
 })
 ```
 

@@ -39,7 +39,7 @@ local client = sdk.new({
 
 ```lua
 -- Create
-local created, err = client:Localize():create({ gate = {}, listing = {}, localized = {}, marketplace = "example_marketplace", pass = true, source_lang = "example_source_lang", target_lang = "example_target_lang", violation = {} })
+local created, err = client:Localize():create({ gates = {}, listing = {}, localized = {}, marketplace = "example_marketplace", pass = true, sourceLang = "example_sourceLang", targetLang = "example_targetLang", violations = {} })
 if err then error(err) end
 
 ```
@@ -51,7 +51,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local localize, err = client:Localize():create({ gate = {}, listing = {}, localized = {}, marketplace = "example", pass = true, source_lang = "example", target_lang = "example", violation = {} })
+local localize, err = client:Localize():create({ gates = {}, listing = {}, localized = {}, marketplace = "example", pass = true, sourceLang = "example", targetLang = "example", violations = {} })
 if err then error(err) end
 ```
 
@@ -109,7 +109,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Localize():create({ gate = {}, listing = {}, localized = {}, marketplace = "example", pass = true, source_lang = "example", target_lang = "example", violation = {} })
+local result, err = client:Localize():create({ gates = {}, listing = {}, localized = {}, marketplace = "example", pass = true, sourceLang = "example", targetLang = "example", violations = {} })
 -- result is the returned data; err is set on failure
 ```
 
@@ -217,9 +217,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local localize, err = client:Localize():load()
+    local localize, err = client:Localize():list()
     if err then error(err) end
-    -- localize is the loaded record
+    -- localize is the record list
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -231,15 +231,15 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | Field | Description |
 | --- | --- |
 | `dictionary` |  |
-| `gate` |  |
+| `gates` |  |
 | `glossary` |  |
 | `listing` |  |
 | `localized` |  |
 | `marketplace` |  |
 | `pass` |  |
-| `source_lang` |  |
-| `target_lang` |  |
-| `violation` |  |
+| `sourceLang` |  |
+| `targetLang` |  |
+| `violations` |  |
 
 Operations: Create.
 
@@ -265,28 +265,28 @@ Create an instance: `local localize = client:Localize(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `dictionary` | `table` |  |
-| `gate` | `table` |  |
+| `gates` | `table` |  |
 | `glossary` | `table` |  |
 | `listing` | `table` |  |
 | `localized` | `table` |  |
 | `marketplace` | `string` |  |
 | `pass` | `boolean` |  |
-| `source_lang` | `string` |  |
-| `target_lang` | `string` |  |
-| `violation` | `table` |  |
+| `sourceLang` | `string` |  |
+| `targetLang` | `string` |  |
+| `violations` | `table` |  |
 
 #### Example: Create
 
 ```lua
 local localize, err = client:Localize():create({
-  gate = {}, -- table
+  gates = {}, -- table
   listing = {}, -- table
   localized = {}, -- table
   marketplace = "example_marketplace", -- string
   pass = true, -- boolean
-  source_lang = "example_source_lang", -- string
-  target_lang = "example_target_lang", -- string
-  violation = {}, -- table
+  sourceLang = "example_sourceLang", -- string
+  targetLang = "example_targetLang", -- string
+  violations = {}, -- table
 })
 ```
 
@@ -368,7 +368,7 @@ stores the returned data and match criteria internally.
 
 ```lua
 local localize = client:Localize()
-localize:create({ gate = {}, listing = {}, localized = {}, marketplace = "example", pass = true, source_lang = "example", target_lang = "example", violation = {} })
+localize:create({ gates = {}, listing = {}, localized = {}, marketplace = "example", pass = true, sourceLang = "example", targetLang = "example", violations = {} })
 
 -- localize:data_get() now returns the localize data from the last create
 -- localize:match_get() returns the last match criteria

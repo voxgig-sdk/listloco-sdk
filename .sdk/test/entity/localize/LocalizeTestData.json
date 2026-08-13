@@ -3,41 +3,41 @@
     "localize": {
       "LOCALIZE00": {
         "dictionary": {},
-        "gate": {},
+        "gates": {},
         "glossary": {},
         "listing": {},
         "localized": {},
         "marketplace": "s69",
         "pass": true,
-        "source_lang": "s6b",
-        "target_lang": "s6c",
-        "violation": [],
+        "sourceLang": "s6b",
+        "targetLang": "s6c",
+        "violations": [],
         "id": "LOCALIZE00"
       },
       "LOCALIZE01": {
         "dictionary": {},
-        "gate": {},
+        "gates": {},
         "glossary": {},
         "listing": {},
         "localized": {},
         "marketplace": "scd",
         "pass": true,
-        "source_lang": "scf",
-        "target_lang": "sd0",
-        "violation": [],
+        "sourceLang": "scf",
+        "targetLang": "sd0",
+        "violations": [],
         "id": "LOCALIZE01"
       },
       "LOCALIZE02": {
         "dictionary": {},
-        "gate": {},
+        "gates": {},
         "glossary": {},
         "listing": {},
         "localized": {},
         "marketplace": "s131",
         "pass": true,
-        "source_lang": "s133",
-        "target_lang": "s134",
-        "violation": [],
+        "sourceLang": "s133",
+        "targetLang": "s134",
+        "violations": [],
         "id": "LOCALIZE02"
       }
     }
@@ -46,15 +46,15 @@
     "localize": {
       "localize_ref01": {
         "dictionary": {},
-        "gate": {},
+        "gates": {},
         "glossary": {},
         "listing": {},
         "localized": {},
         "marketplace": "s195",
         "pass": true,
-        "source_lang": "s197",
-        "target_lang": "s198",
-        "violation": []
+        "sourceLang": "s197",
+        "targetLang": "s198",
+        "violations": []
       }
     }
   }

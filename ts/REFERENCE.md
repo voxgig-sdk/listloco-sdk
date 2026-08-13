@@ -118,15 +118,15 @@ const localize = client.Localize()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `dictionary` | `Record<string, any>` | No |  |
-| `gate` | `Record<string, any>` | Yes |  |
+| `gates` | `Record<string, any>` | Yes |  |
 | `glossary` | `Record<string, any>` | No |  |
 | `listing` | `Record<string, any>` | Yes |  |
 | `localized` | `Record<string, any>` | Yes |  |
 | `marketplace` | `string` | Yes |  |
 | `pass` | `boolean` | Yes |  |
-| `source_lang` | `string` | Yes |  |
-| `target_lang` | `string` | Yes |  |
-| `violation` | `any[]` | Yes |  |
+| `sourceLang` | `string` | Yes |  |
+| `targetLang` | `string` | Yes |  |
+| `violations` | `any[]` | Yes |  |
 
 ### Operations
 
@@ -136,14 +136,14 @@ Create a new entity with the given data.
 
 ```ts
 const result = await client.Localize().create({
-  gate: {},
+  gates: {},
   listing: {},
   localized: {},
   marketplace: 'example_marketplace',
   pass: true,
-  source_lang: 'example_source_lang',
-  target_lang: 'example_target_lang',
-  violation: [],
+  sourceLang: 'example_sourceLang',
+  targetLang: 'example_targetLang',
+  violations: [],
 })
 ```
 

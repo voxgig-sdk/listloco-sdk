@@ -42,8 +42,8 @@ client = ListlocoSDK({
 ### 4. Create, update, and remove
 
 ```python
-# Create — returns the bare created record (a dict)
-created = client.Localize().create({"gate": {}, "listing": {}, "localized": {}, "marketplace": "example_marketplace", "pass": True, "source_lang": "example_source_lang", "target_lang": "example_target_lang", "violation": []})
+# Create — returns the ENTITY (call data_get() for the record)
+created = client.Localize().create({"gates": {}, "listing": {}, "localized": {}, "marketplace": "example_marketplace", "pass": True, "sourceLang": "example_sourceLang", "targetLang": "example_targetLang", "violations": []})
 
 ```
 
@@ -54,7 +54,7 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    localize = client.Localize().create({ "gate": {}, "listing": {}, "localized": {}, "marketplace": "example", "pass": True, "source_lang": "example", "target_lang": "example", "violation": [] })
+    localize = client.Localize().create({ "gates": {}, "listing": {}, "localized": {}, "marketplace": "example", "pass": True, "sourceLang": "example", "targetLang": "example", "violations": [] })
     print(localize)
 except Exception as err:
     print(f"create failed: {err}")
@@ -121,8 +121,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = ListlocoSDK.test()
 
-# Entity ops return the bare record and raise on error.
-localize = client.Localize().create({"gate": {}, "listing": {}, "localized": {}, "marketplace": "example", "pass": True, "source_lang": "example", "target_lang": "example", "violation": []})
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+localize = client.Localize().create({"gates": {}, "listing": {}, "localized": {}, "marketplace": "example", "pass": True, "sourceLang": "example", "targetLang": "example", "violations": []})
 # localize contains the mock response record
 ```
 
@@ -219,7 +220,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -242,15 +243,15 @@ On error, `ok` is `False` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `dictionary` |  |
-| `gate` |  |
+| `gates` |  |
 | `glossary` |  |
 | `listing` |  |
 | `localized` |  |
 | `marketplace` |  |
 | `pass` |  |
-| `source_lang` |  |
-| `target_lang` |  |
-| `violation` |  |
+| `sourceLang` |  |
+| `targetLang` |  |
+| `violations` |  |
 
 Operations: Create.
 
@@ -276,28 +277,28 @@ Create an instance: `localize = client.Localize()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `dictionary` | `dict` |  |
-| `gate` | `dict` |  |
+| `gates` | `dict` |  |
 | `glossary` | `dict` |  |
 | `listing` | `dict` |  |
 | `localized` | `dict` |  |
 | `marketplace` | `str` |  |
 | `pass` | `bool` |  |
-| `source_lang` | `str` |  |
-| `target_lang` | `str` |  |
-| `violation` | `list` |  |
+| `sourceLang` | `str` |  |
+| `targetLang` | `str` |  |
+| `violations` | `list` |  |
 
 #### Example: Create
 
 ```python
 localize = client.Localize().create({
-    "gate": {},  # dict
+    "gates": {},  # dict
     "listing": {},  # dict
     "localized": {},  # dict
     "marketplace": "example_marketplace",  # str
     "pass": True,  # bool
-    "source_lang": "example_source_lang",  # str
-    "target_lang": "example_target_lang",  # str
-    "violation": [],  # list
+    "sourceLang": "example_sourceLang",  # str
+    "targetLang": "example_targetLang",  # str
+    "violations": [],  # list
 })
 ```
 
@@ -378,7 +379,7 @@ stores the returned data and match criteria internally.
 
 ```python
 localize = client.Localize()
-localize.create({ "gate": {}, "listing": {}, "localized": {}, "marketplace": "example", "pass": True, "source_lang": "example", "target_lang": "example", "violation": [] })
+localize.create({ "gates": {}, "listing": {}, "localized": {}, "marketplace": "example", "pass": True, "sourceLang": "example", "targetLang": "example", "violations": [] })
 
 # localize.data_get() now returns the localize data from the last create
 # localize.match_get() returns the last match criteria

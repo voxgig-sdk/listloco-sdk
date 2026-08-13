@@ -37,7 +37,7 @@ class LocalizeEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.localize"), "localize_ref01"))
 
     localize_ref01_data_result = localize_ref01_ent.create(localize_ref01_data, nil)
-    localize_ref01_data = Helpers.to_map(localize_ref01_data_result)
+    localize_ref01_data = Helpers.to_map(localize_ref01_data_result.respond_to?(:data_get) ? localize_ref01_data_result.data_get : localize_ref01_data_result)
     assert !localize_ref01_data.nil?
 
   end

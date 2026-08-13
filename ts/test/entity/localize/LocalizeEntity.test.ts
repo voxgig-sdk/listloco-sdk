@@ -62,7 +62,7 @@ describe('LocalizeEntity', async () => {
     const localize_ref01_ent = client.Localize()
     let localize_ref01_data = setup.data.new.localize['localize_ref01']
 
-    localize_ref01_data = await localize_ref01_ent.create(localize_ref01_data)
+    localize_ref01_data = (await localize_ref01_ent.create(localize_ref01_data)).data()
     assert(null != localize_ref01_data)
 
 

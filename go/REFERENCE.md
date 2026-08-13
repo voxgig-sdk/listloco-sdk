@@ -100,15 +100,15 @@ fmt.Println(localize.GetName()) // "localize"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `dictionary` | `map[string]any` | No |  |
-| `gate` | `map[string]any` | Yes |  |
+| `gates` | `map[string]any` | Yes |  |
 | `glossary` | `map[string]any` | No |  |
 | `listing` | `map[string]any` | Yes |  |
 | `localized` | `map[string]any` | Yes |  |
 | `marketplace` | `string` | Yes |  |
 | `pass` | `bool` | Yes |  |
-| `source_lang` | `string` | Yes |  |
-| `target_lang` | `string` | Yes |  |
-| `violation` | `[]any` | Yes |  |
+| `sourceLang` | `string` | Yes |  |
+| `targetLang` | `string` | Yes |  |
+| `violations` | `[]any` | Yes |  |
 
 ### Operations
 
@@ -118,14 +118,14 @@ Create a new entity with the given data.
 
 ```go
 result, err := client.Localize(nil).Create(map[string]any{
-    "gate": map[string]any{},
+    "gates": map[string]any{},
     "listing": map[string]any{},
     "localized": map[string]any{},
     "marketplace": "example_marketplace",
     "pass": true,
-    "source_lang": "example_source_lang",
-    "target_lang": "example_target_lang",
-    "violation": []any{},
+    "sourceLang": "example_sourceLang",
+    "targetLang": "example_targetLang",
+    "violations": []any{},
 }, nil)
 if err != nil {
     panic(err)

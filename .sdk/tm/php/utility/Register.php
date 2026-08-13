@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ ListlocoUtility::setRegistrar(function (ListlocoUtility $u): void {
     $u->prepare_params = [ListlocoPrepareParams::class, 'call'];
     $u->prepare_path = [ListlocoPreparePath::class, 'call'];
     $u->prepare_query = [ListlocoPrepareQuery::class, 'call'];
+    $u->graphql_body = [ListlocoGraphql::class, 'body'];
+    $u->graphql_errors = [ListlocoGraphql::class, 'errors'];
     $u->result_basic = [ListlocoResultBasic::class, 'call'];
     $u->result_body = [ListlocoResultBody::class, 'call'];
     $u->result_headers = [ListlocoResultHeaders::class, 'call'];

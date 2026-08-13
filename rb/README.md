@@ -35,8 +35,8 @@ client = ListlocoSDK.new({
 ### 4. Create, update, and remove
 
 ```ruby
-# create returns the bare created Localize record.
-created = client.Localize.create({ "gate" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example_marketplace", "pass" => true, "source_lang" => "example_source_lang", "target_lang" => "example_target_lang", "violation" => [] })
+# create returns the ENTITY — call data_get for the created Localize record.
+created = client.Localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example_marketplace", "pass" => true, "sourceLang" => "example_sourceLang", "targetLang" => "example_targetLang", "violations" => [] })
 
 ```
 
@@ -47,7 +47,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  localize = client.Localize.create({ "gate" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "source_lang" => "example", "target_lang" => "example", "violation" => [] })
+  localize = client.Localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => [] })
 rescue => err
   warn "create failed: #{err}"
 end
@@ -115,8 +115,9 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = ListlocoSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-localize = client.Localize.create({ "gate" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "source_lang" => "example", "target_lang" => "example", "violation" => [] })
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+localize = client.Localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => [] })
 puts localize
 ```
 
@@ -235,15 +236,15 @@ returns a result `Hash` with these keys:
 | Field | Description |
 | --- | --- |
 | `dictionary` |  |
-| `gate` |  |
+| `gates` |  |
 | `glossary` |  |
 | `listing` |  |
 | `localized` |  |
 | `marketplace` |  |
 | `pass` |  |
-| `source_lang` |  |
-| `target_lang` |  |
-| `violation` |  |
+| `sourceLang` |  |
+| `targetLang` |  |
+| `violations` |  |
 
 Operations: Create.
 
@@ -269,28 +270,28 @@ Create an instance: `localize = client.Localize`
 | Field | Type | Description |
 | --- | --- | --- |
 | `dictionary` | `Hash` |  |
-| `gate` | `Hash` |  |
+| `gates` | `Hash` |  |
 | `glossary` | `Hash` |  |
 | `listing` | `Hash` |  |
 | `localized` | `Hash` |  |
 | `marketplace` | `String` |  |
 | `pass` | `Boolean` |  |
-| `source_lang` | `String` |  |
-| `target_lang` | `String` |  |
-| `violation` | `Array` |  |
+| `sourceLang` | `String` |  |
+| `targetLang` | `String` |  |
+| `violations` | `Array` |  |
 
 #### Example: Create
 
 ```ruby
 localize = client.Localize.create({
-  "gate" => {}, # Hash
+  "gates" => {}, # Hash
   "listing" => {}, # Hash
   "localized" => {}, # Hash
   "marketplace" => "example_marketplace", # String
   "pass" => true, # Boolean
-  "source_lang" => "example_source_lang", # String
-  "target_lang" => "example_target_lang", # String
-  "violation" => [], # Array
+  "sourceLang" => "example_sourceLang", # String
+  "targetLang" => "example_targetLang", # String
+  "violations" => [], # Array
 })
 ```
 
@@ -372,7 +373,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 localize = client.Localize
-localize.create({ "gate" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "source_lang" => "example", "target_lang" => "example", "violation" => [] })
+localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => [] })
 
 # localize.data_get now returns the localize data from the last create
 # localize.match_get returns the last match criteria

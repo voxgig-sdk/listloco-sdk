@@ -38,16 +38,16 @@ const client = new ListlocoSDK({
 ### 4. Create, update, and remove
 
 ```ts
-// Create — returns the created Localize
+// Create — returns the created Localize ENTITY (.data() for the record)
 const created = await client.Localize().create({
-  gate: {},
+  gates: {},
   listing: {},
   localized: {},
   marketplace: 'example_marketplace',
   pass: true,
-  source_lang: 'example_source_lang',
-  target_lang: 'example_target_lang',
-  violation: [],
+  sourceLang: 'example_sourceLang',
+  targetLang: 'example_targetLang',
+  violations: [],
 })
 
 ```
@@ -59,7 +59,7 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const localize = await client.Localize().create({ gate: {}, listing: {}, localized: {}, marketplace: "example", pass: true, source_lang: "example", target_lang: "example", violation: [] })
+  const localize = await client.Localize().create({ gates: {}, listing: {}, localized: {}, marketplace: "example", pass: true, sourceLang: "example", targetLang: "example", violations: [] })
   console.log(localize)
 } catch (err) {
   console.error('create failed:', err)
@@ -126,8 +126,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = ListlocoSDK.test()
 
-const localize = await client.Localize().create({ gate: {}, listing: {}, localized: {}, marketplace: 'example_marketplace', pass: true, source_lang: 'example_source_lang', target_lang: 'example_target_lang', violation: [] })
-// localize is a bare entity populated with mock response data
+const localize = await client.Localize().create({ gates: {}, listing: {}, localized: {}, marketplace: 'example_marketplace', pass: true, sourceLang: 'example_sourceLang', targetLang: 'example_targetLang', violations: [] })
+// localize is the entity, populated with mock response data
+// — call localize.data() for the record itself
 console.log(localize)
 ```
 
@@ -146,7 +147,7 @@ Entity instances remember their last match and data:
 const entity = client.Localize()
 
 // First call runs the operation and stores its result
-await entity.create({ gate: {}, listing: {}, localized: {}, marketplace: 'example_marketplace', pass: true, source_lang: 'example_source_lang', target_lang: 'example_target_lang', violation: [] })
+await entity.create({ gates: {}, listing: {}, localized: {}, marketplace: 'example_marketplace', pass: true, sourceLang: 'example_sourceLang', targetLang: 'example_targetLang', violations: [] })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -295,15 +296,15 @@ The `prepare()` method returns:
 | Field | Description |
 | --- | --- |
 | `dictionary` |  |
-| `gate` |  |
+| `gates` |  |
 | `glossary` |  |
 | `listing` |  |
 | `localized` |  |
 | `marketplace` |  |
 | `pass` |  |
-| `source_lang` |  |
-| `target_lang` |  |
-| `violation` |  |
+| `sourceLang` |  |
+| `targetLang` |  |
+| `violations` |  |
 
 Operations: create.
 
@@ -329,28 +330,28 @@ Create an instance: `const localize = client.Localize()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `dictionary` | `Record<string, any>` |  |
-| `gate` | `Record<string, any>` |  |
+| `gates` | `Record<string, any>` |  |
 | `glossary` | `Record<string, any>` |  |
 | `listing` | `Record<string, any>` |  |
 | `localized` | `Record<string, any>` |  |
 | `marketplace` | `string` |  |
 | `pass` | `boolean` |  |
-| `source_lang` | `string` |  |
-| `target_lang` | `string` |  |
-| `violation` | `any[]` |  |
+| `sourceLang` | `string` |  |
+| `targetLang` | `string` |  |
+| `violations` | `any[]` |  |
 
 #### Example: Create
 
 ```ts
 const localize = await client.Localize().create({
-  gate: {},
+  gates: {},
   listing: {},
   localized: {},
   marketplace: 'example_marketplace',
   pass: true,
-  source_lang: 'example_source_lang',
-  target_lang: 'example_target_lang',
-  violation: [],
+  sourceLang: 'example_sourceLang',
+  targetLang: 'example_targetLang',
+  violations: [],
 })
 ```
 
@@ -425,7 +426,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const localize = client.Localize()
-await localize.create({ gate: {}, listing: {}, localized: {}, marketplace: "example", pass: true, source_lang: "example", target_lang: "example", violation: [] })
+await localize.create({ gates: {}, listing: {}, localized: {}, marketplace: "example", pass: true, sourceLang: "example", targetLang: "example", violations: [] })
 
 // localize.data() now returns the localize data from the last `create`
 // localize.match() returns the last match criteria

@@ -8,27 +8,27 @@
 
 ---@class Localize
 ---@field dictionary? table
----@field gate table
+---@field gates table
 ---@field glossary? table
 ---@field listing table
 ---@field localized table
 ---@field marketplace string
 ---@field pass boolean
----@field source_lang string
----@field target_lang string
----@field violation table
+---@field sourceLang string
+---@field targetLang string
+---@field violations table
 
 ---@class LocalizeCreateData
 ---@field dictionary? table
----@field gate table
+---@field gates table
 ---@field glossary? table
 ---@field listing table
 ---@field localized table
 ---@field marketplace string
 ---@field pass boolean
----@field source_lang string
----@field target_lang string
----@field violation table
+---@field sourceLang string
+---@field targetLang string
+---@field violations table
 
 local M = {}
 

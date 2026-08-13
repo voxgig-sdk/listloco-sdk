@@ -36,8 +36,8 @@ $client = new ListlocoSDK([
 ### 4. Create, update, and remove
 
 ```php
-// create() returns the bare created Localize record.
-$created = $client->Localize()->create(["gate" => [], "listing" => [], "localized" => [], "marketplace" => "example_marketplace", "pass" => true, "source_lang" => "example_source_lang", "target_lang" => "example_target_lang", "violation" => []]);
+// create() returns the ENTITY — call data_get() for the created Localize record.
+$created = $client->Localize()->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example_marketplace", "pass" => true, "sourceLang" => "example_sourceLang", "targetLang" => "example_targetLang", "violations" => []]);
 
 ```
 
@@ -49,7 +49,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $localize = $client->Localize()->create(["gate" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "source_lang" => "example", "target_lang" => "example", "violation" => []]);
+    $localize = $client->Localize()->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => []]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -121,8 +121,9 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = ListlocoSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$localize = $client->Localize()->create(["gate" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "source_lang" => "example", "target_lang" => "example", "violation" => []]);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$localize = $client->Localize()->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => []]);
 print_r($localize);
 ```
 
@@ -222,7 +223,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -245,15 +246,15 @@ On error, `ok` is `false` and `$err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `dictionary` |  |
-| `gate` |  |
+| `gates` |  |
 | `glossary` |  |
 | `listing` |  |
 | `localized` |  |
 | `marketplace` |  |
 | `pass` |  |
-| `source_lang` |  |
-| `target_lang` |  |
-| `violation` |  |
+| `sourceLang` |  |
+| `targetLang` |  |
+| `violations` |  |
 
 Operations: Create.
 
@@ -279,28 +280,28 @@ Create an instance: `$localize = $client->Localize();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `dictionary` | `array` |  |
-| `gate` | `array` |  |
+| `gates` | `array` |  |
 | `glossary` | `array` |  |
 | `listing` | `array` |  |
 | `localized` | `array` |  |
 | `marketplace` | `string` |  |
 | `pass` | `bool` |  |
-| `source_lang` | `string` |  |
-| `target_lang` | `string` |  |
-| `violation` | `array` |  |
+| `sourceLang` | `string` |  |
+| `targetLang` | `string` |  |
+| `violations` | `array` |  |
 
 #### Example: Create
 
 ```php
 $localize = $client->Localize()->create([
-    "gate" => null, // array
+    "gates" => null, // array
     "listing" => null, // array
     "localized" => null, // array
     "marketplace" => null, // string
     "pass" => null, // bool
-    "source_lang" => null, // string
-    "target_lang" => null, // string
-    "violation" => null, // array
+    "sourceLang" => null, // string
+    "targetLang" => null, // string
+    "violations" => null, // array
 ]);
 ```
 
@@ -382,7 +383,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $localize = $client->Localize();
-$localize->create(["gate" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "source_lang" => "example", "target_lang" => "example", "violation" => []]);
+$localize->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => []]);
 
 // $localize->data_get() now returns the localize data from the last create
 // $localize->match_get() returns the last match criteria

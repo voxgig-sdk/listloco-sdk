@@ -95,15 +95,15 @@ localize = client.Localize
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `dictionary` | `Hash` | No |  |
-| `gate` | `Hash` | Yes |  |
+| `gates` | `Hash` | Yes |  |
 | `glossary` | `Hash` | No |  |
 | `listing` | `Hash` | Yes |  |
 | `localized` | `Hash` | Yes |  |
 | `marketplace` | `String` | Yes |  |
 | `pass` | `Boolean` | Yes |  |
-| `source_lang` | `String` | Yes |  |
-| `target_lang` | `String` | Yes |  |
-| `violation` | `Array` | Yes |  |
+| `sourceLang` | `String` | Yes |  |
+| `targetLang` | `String` | Yes |  |
+| `violations` | `Array` | Yes |  |
 
 ### Operations
 
@@ -113,14 +113,14 @@ Create a new entity with the given data. Raises on error.
 
 ```ruby
 result = client.Localize.create({
-  "gate" => {}, # Hash
+  "gates" => {}, # Hash
   "listing" => {}, # Hash
   "localized" => {}, # Hash
   "marketplace" => "example_marketplace", # String
   "pass" => true, # Boolean
-  "source_lang" => "example_source_lang", # String
-  "target_lang" => "example_target_lang", # String
-  "violation" => [], # Array
+  "sourceLang" => "example_sourceLang", # String
+  "targetLang" => "example_targetLang", # String
+  "violations" => [], # Array
 })
 ```
 

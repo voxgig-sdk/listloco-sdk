@@ -24,14 +24,14 @@ support (`create`):
 ```ts
 const client = new ListlocoSDK()
 const localize = await client.Localize().create({
-  gate: {},
+  gates: {},
   listing: {},
   localized: {},
   marketplace: 'example',
   pass: true,
-  source_lang: 'example',
-  target_lang: 'example',
-  violation: [],
+  sourceLang: 'example',
+  targetLang: 'example',
+  violations: [],
 })
 ```
 
@@ -47,9 +47,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = ListlocoSDK.test()
-const localize = await client.Localize().create({ gate: {}, listing: {}, localized: {}, marketplace: 'example_marketplace', pass: true, source_lang: 'example_source_lang', target_lang: 'example_target_lang', violation: [] })
-// localize is a bare Localize populated with mock data
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = ListlocoSDK.test({
+  entity: {
+    localize: {
+      test01: { id: 'test01', gates: {}, listing: {}, localized: {} },
+    },
+  },
+})
+const localize = await client.Localize().create({ gates: {}, listing: {}, localized: {}, marketplace: 'example_marketplace', pass: true, sourceLang: 'example_sourceLang', targetLang: 'example_targetLang', violations: [] })
+// localize is the Localize entity, populated with mock data
+// — call localize.data() for the record itself
 console.log(localize)
 ```
 
@@ -57,7 +66,7 @@ console.log(localize)
 
 ```python
 client = ListlocoSDK.test()
-localize = client.Localize().create({"gate": {}, "listing": {}, "localized": {}, "marketplace": "example", "pass": True, "source_lang": "example", "target_lang": "example", "violation": []})
+localize = client.Localize().create({"gates": {}, "listing": {}, "localized": {}, "marketplace": "example", "pass": True, "sourceLang": "example", "targetLang": "example", "violations": []})
 print(localize)
 ```
 
@@ -68,7 +77,7 @@ print(localize)
 $client = ListlocoSDK::test([
     "entity" => ["localize" => ["test01" => []]],
 ]);
-$localize = $client->Localize()->create(["gate" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "source_lang" => "example", "target_lang" => "example", "violation" => []]);
+$localize = $client->Localize()->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => []]);
 ```
 
 ### Golang
@@ -76,7 +85,7 @@ $localize = $client->Localize()->create(["gate" => [], "listing" => [], "localiz
 ```go
 client := sdk.Test()
 result, err := client.Localize(nil).Create(
-    map[string]any{"gate": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "source_lang": "example", "target_lang": "example", "violation": []any{}}, nil,
+    map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "sourceLang": "example", "targetLang": "example", "violations": []any{}}, nil,
 )
 ```
 
@@ -87,14 +96,14 @@ result, err := client.Localize(nil).Create(
 client = ListlocoSDK.test({
   "entity" => { "localize" => { "test01" => {} } },
 })
-localize = client.Localize.create({ "gate" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "source_lang" => "example", "target_lang" => "example", "violation" => [] })
+localize = client.Localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => [] })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Localize():create({ gate = {}, listing = {}, localized = {}, marketplace = "example", pass = true, source_lang = "example", target_lang = "example", violation = {} })
+local result, err = client:Localize():create({ gates = {}, listing = {}, localized = {}, marketplace = "example", pass = true, sourceLang = "example", targetLang = "example", violations = {} })
 ```
 
 ## Packages
@@ -341,6 +350,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://listloco.hayasaka.app](https://listloco.hayasaka.app)
 

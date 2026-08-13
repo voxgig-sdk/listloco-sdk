@@ -54,7 +54,7 @@ func main() {
     })
 
     // Create a localize.
-    created, err := client.Localize(nil).Create(map[string]any{"gate": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example_marketplace", "pass": true, "source_lang": "example_source_lang", "target_lang": "example_target_lang", "violation": []any{}}, nil)
+    created, err := client.Localize(nil).Create(map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example_marketplace", "pass": true, "sourceLang": "example_sourceLang", "targetLang": "example_targetLang", "violations": []any{}}, nil)
     if err != nil {
         panic(err)
     }
@@ -69,7 +69,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-localize, err := client.Localize(nil).Create(map[string]any{"gate": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "source_lang": "example", "target_lang": "example", "violation": []any{}}, nil)
+localize, err := client.Localize(nil).Create(map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "sourceLang": "example", "targetLang": "example", "violations": []any{}}, nil)
 if err != nil {
     // handle err
     return
@@ -139,7 +139,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 localize, err := client.Localize(nil).Create(
-    map[string]any{"gate": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "source_lang": "example", "target_lang": "example", "violation": []any{}}, nil,
+    map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "sourceLang": "example", "targetLang": "example", "violations": []any{}}, nil,
 )
 if err != nil {
     panic(err)
@@ -264,15 +264,15 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | Field | Description |
 | --- | --- |
 | `"dictionary"` |  |
-| `"gate"` |  |
+| `"gates"` |  |
 | `"glossary"` |  |
 | `"listing"` |  |
 | `"localized"` |  |
 | `"marketplace"` |  |
 | `"pass"` |  |
-| `"source_lang"` |  |
-| `"target_lang"` |  |
-| `"violation"` |  |
+| `"sourceLang"` |  |
+| `"targetLang"` |  |
+| `"violations"` |  |
 
 Operations: Create.
 
@@ -298,28 +298,28 @@ Create an instance: `localize := client.Localize(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `dictionary` | `map[string]any` |  |
-| `gate` | `map[string]any` |  |
+| `gates` | `map[string]any` |  |
 | `glossary` | `map[string]any` |  |
 | `listing` | `map[string]any` |  |
 | `localized` | `map[string]any` |  |
 | `marketplace` | `string` |  |
 | `pass` | `bool` |  |
-| `source_lang` | `string` |  |
-| `target_lang` | `string` |  |
-| `violation` | `[]any` |  |
+| `sourceLang` | `string` |  |
+| `targetLang` | `string` |  |
+| `violations` | `[]any` |  |
 
 #### Example: Create
 
 ```go
 result, err := client.Localize(nil).Create(map[string]any{
-    "gate": map[string]any{},
+    "gates": map[string]any{},
     "listing": map[string]any{},
     "localized": map[string]any{},
     "marketplace": "example_marketplace",
     "pass": true,
-    "source_lang": "example_source_lang",
-    "target_lang": "example_target_lang",
-    "violation": []any{},
+    "sourceLang": "example_sourceLang",
+    "targetLang": "example_targetLang",
+    "violations": []any{},
 }, nil)
 if err != nil {
     panic(err)
@@ -402,7 +402,7 @@ stores the returned data and match criteria internally.
 
 ```go
 localize := client.Localize(nil)
-localize.Create(map[string]any{"gate": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "source_lang": "example", "target_lang": "example", "violation": []any{}}, nil)
+localize.Create(map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "sourceLang": "example", "targetLang": "example", "violations": []any{}}, nil)
 
 // localize.Data() now returns the localize data from the last create
 // localize.Match() returns the last match criteria

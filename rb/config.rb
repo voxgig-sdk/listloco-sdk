@@ -37,7 +37,7 @@ module ListlocoConfig
             },
             {
               "active" => true,
-              "name" => "gate",
+              "name" => "gates",
               "req" => true,
               "type" => "`$OBJECT`",
               "index$" => 1,
@@ -79,21 +79,21 @@ module ListlocoConfig
             },
             {
               "active" => true,
-              "name" => "source_lang",
+              "name" => "sourceLang",
               "req" => true,
               "type" => "`$STRING`",
               "index$" => 7,
             },
             {
               "active" => true,
-              "name" => "target_lang",
+              "name" => "targetLang",
               "req" => true,
               "type" => "`$STRING`",
               "index$" => 8,
             },
             {
               "active" => true,
-              "name" => "violation",
+              "name" => "violations",
               "req" => true,
               "type" => "`$ARRAY`",
               "index$" => 9,
@@ -108,6 +108,7 @@ module ListlocoConfig
                 {
                   "active" => true,
                   "args" => {},
+                  "kind" => "http",
                   "method" => "POST",
                   "orig" => "/localize",
                   "parts" => [

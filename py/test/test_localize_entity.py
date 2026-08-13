@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from listloco_sdk.utility.voxgig_struct import voxgig_struct as vs
 from listloco_sdk import ListlocoSDK
-from core import helpers
+from listloco_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -44,7 +44,7 @@ class TestLocalizeEntity:
         localize_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.localize"), "localize_ref01"))
 
-        localize_ref01_data = helpers.to_map(localize_ref01_ent.create(localize_ref01_data, None))
+        localize_ref01_data = helpers.to_map(runner.entity_data(localize_ref01_ent.create(localize_ref01_data, None)))
         assert localize_ref01_data is not None
 
 
