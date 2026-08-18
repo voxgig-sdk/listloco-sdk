@@ -40,7 +40,7 @@ class ListlocoSDK
         $utility = new ListlocoUtility();
         $this->_utility = $utility;
 
-        $config = ListlocoConfig::make_config();
+        $config = ListlocoConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

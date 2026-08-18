@@ -28,7 +28,7 @@ class ListlocoSDK
     utility = ListlocoUtility.new
     @_utility = utility
 
-    config = ListlocoConfig.make_config
+    config = ListlocoConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,
