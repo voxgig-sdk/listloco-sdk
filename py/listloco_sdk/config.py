@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "Listloco",
+            "slug": "listloco",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -53,50 +56,60 @@ def make_config():
         "fields": [
           {
             "name": "dictionary",
+            "short": "Custom translation dictionary mapping source terms to target translations",
             "type": "`$OBJECT`",
           },
           {
             "name": "gates",
             "req": True,
+            "short": "Deterministic quality gate results",
             "type": "`$OBJECT`",
           },
           {
             "name": "glossary",
+            "short": "Customer glossary for enforcing brand terms and model numbers",
             "type": "`$OBJECT`",
           },
           {
             "name": "listing",
             "req": True,
+            "short": "Product listing information to be localized",
             "type": "`$OBJECT`",
           },
           {
             "name": "localized",
             "req": True,
+            "short": "Localized listing content",
             "type": "`$OBJECT`",
           },
           {
             "name": "marketplace",
             "req": True,
+            "short": "Target marketplace for compliance rules.",
             "type": "`$STRING`",
           },
           {
             "name": "pass",
             "req": True,
+            "short": "Overall pass/fail status - true if all gates passed, false if any gate failed",
             "type": "`$BOOLEAN`",
           },
           {
             "name": "sourceLang",
             "req": True,
+            "short": "Source language code (ISO 639-1).",
             "type": "`$STRING`",
           },
           {
             "name": "targetLang",
             "req": True,
+            "short": "Target language code (ISO 639-1).",
             "type": "`$STRING`",
           },
           {
             "name": "violations",
             "req": True,
+            "short": "List of compliance violations if any gate failed",
             "type": "`$ARRAY`",
           },
         ],

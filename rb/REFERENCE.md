@@ -94,16 +94,16 @@ localize = client.Localize
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `dictionary` | `Hash` | No |  |
-| `gates` | `Hash` | Yes |  |
-| `glossary` | `Hash` | No |  |
-| `listing` | `Hash` | Yes |  |
-| `localized` | `Hash` | Yes |  |
-| `marketplace` | `String` | Yes |  |
-| `pass` | `Boolean` | Yes |  |
-| `sourceLang` | `String` | Yes |  |
-| `targetLang` | `String` | Yes |  |
-| `violations` | `Array` | Yes |  |
+| `dictionary` | `Hash` | No | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `Hash` | Yes | Deterministic quality gate results |
+| `glossary` | `Hash` | No | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `Hash` | Yes | Product listing information to be localized |
+| `localized` | `Hash` | Yes | Localized listing content |
+| `marketplace` | `String` | Yes | Target marketplace for compliance rules. |
+| `pass` | `Boolean` | Yes | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `String` | Yes | Source language code (ISO 639-1). |
+| `targetLang` | `String` | Yes | Target language code (ISO 639-1). |
+| `violations` | `Array` | Yes | List of compliance violations if any gate failed |
 
 ### Operations
 

@@ -6,7 +6,7 @@ The Golang SDK for the Listloco API — an entity-oriented client using standard
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Localize(nil)` — each with the same small set of operations (`Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -263,16 +263,16 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"dictionary"` |  |
-| `"gates"` |  |
-| `"glossary"` |  |
-| `"listing"` |  |
-| `"localized"` |  |
-| `"marketplace"` |  |
-| `"pass"` |  |
-| `"sourceLang"` |  |
-| `"targetLang"` |  |
-| `"violations"` |  |
+| `"dictionary"` | Custom translation dictionary mapping source terms to target translations |
+| `"gates"` | Deterministic quality gate results |
+| `"glossary"` | Customer glossary for enforcing brand terms and model numbers |
+| `"listing"` | Product listing information to be localized |
+| `"localized"` | Localized listing content |
+| `"marketplace"` | Target marketplace for compliance rules. |
+| `"pass"` | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `"sourceLang"` | Source language code (ISO 639-1). |
+| `"targetLang"` | Target language code (ISO 639-1). |
+| `"violations"` | List of compliance violations if any gate failed |
 
 Operations: Create.
 
@@ -297,16 +297,16 @@ Create an instance: `localize := client.Localize(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `dictionary` | `map[string]any` |  |
-| `gates` | `map[string]any` |  |
-| `glossary` | `map[string]any` |  |
-| `listing` | `map[string]any` |  |
-| `localized` | `map[string]any` |  |
-| `marketplace` | `string` |  |
-| `pass` | `bool` |  |
-| `sourceLang` | `string` |  |
-| `targetLang` | `string` |  |
-| `violations` | `[]any` |  |
+| `dictionary` | `map[string]any` | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `map[string]any` | Deterministic quality gate results |
+| `glossary` | `map[string]any` | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `map[string]any` | Product listing information to be localized |
+| `localized` | `map[string]any` | Localized listing content |
+| `marketplace` | `string` | Target marketplace for compliance rules. |
+| `pass` | `bool` | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `string` | Source language code (ISO 639-1). |
+| `targetLang` | `string` | Target language code (ISO 639-1). |
+| `violations` | `[]any` | List of compliance violations if any gate failed |
 
 #### Example: Create
 

@@ -235,16 +235,16 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `dictionary` |  |
-| `gates` |  |
-| `glossary` |  |
-| `listing` |  |
-| `localized` |  |
-| `marketplace` |  |
-| `pass` |  |
-| `sourceLang` |  |
-| `targetLang` |  |
-| `violations` |  |
+| `dictionary` | Custom translation dictionary mapping source terms to target translations |
+| `gates` | Deterministic quality gate results |
+| `glossary` | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | Product listing information to be localized |
+| `localized` | Localized listing content |
+| `marketplace` | Target marketplace for compliance rules. |
+| `pass` | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | Source language code (ISO 639-1). |
+| `targetLang` | Target language code (ISO 639-1). |
+| `violations` | List of compliance violations if any gate failed |
 
 Operations: Create.
 
@@ -269,16 +269,16 @@ Create an instance: `localize = client.Localize`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `dictionary` | `Hash` |  |
-| `gates` | `Hash` |  |
-| `glossary` | `Hash` |  |
-| `listing` | `Hash` |  |
-| `localized` | `Hash` |  |
-| `marketplace` | `String` |  |
-| `pass` | `Boolean` |  |
-| `sourceLang` | `String` |  |
-| `targetLang` | `String` |  |
-| `violations` | `Array` |  |
+| `dictionary` | `Hash` | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `Hash` | Deterministic quality gate results |
+| `glossary` | `Hash` | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `Hash` | Product listing information to be localized |
+| `localized` | `Hash` | Localized listing content |
+| `marketplace` | `String` | Target marketplace for compliance rules. |
+| `pass` | `Boolean` | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `String` | Source language code (ISO 639-1). |
+| `targetLang` | `String` | Target language code (ISO 639-1). |
+| `violations` | `Array` | List of compliance violations if any gate failed |
 
 #### Example: Create
 

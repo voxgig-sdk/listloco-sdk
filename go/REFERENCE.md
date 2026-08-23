@@ -99,16 +99,16 @@ fmt.Println(localize.GetName()) // "localize"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `dictionary` | `map[string]any` | No |  |
-| `gates` | `map[string]any` | Yes |  |
-| `glossary` | `map[string]any` | No |  |
-| `listing` | `map[string]any` | Yes |  |
-| `localized` | `map[string]any` | Yes |  |
-| `marketplace` | `string` | Yes |  |
-| `pass` | `bool` | Yes |  |
-| `sourceLang` | `string` | Yes |  |
-| `targetLang` | `string` | Yes |  |
-| `violations` | `[]any` | Yes |  |
+| `dictionary` | `map[string]any` | No | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `map[string]any` | Yes | Deterministic quality gate results |
+| `glossary` | `map[string]any` | No | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `map[string]any` | Yes | Product listing information to be localized |
+| `localized` | `map[string]any` | Yes | Localized listing content |
+| `marketplace` | `string` | Yes | Target marketplace for compliance rules. |
+| `pass` | `bool` | Yes | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `string` | Yes | Source language code (ISO 639-1). |
+| `targetLang` | `string` | Yes | Target language code (ISO 639-1). |
+| `violations` | `[]any` | Yes | List of compliance violations if any gate failed |
 
 ### Operations
 

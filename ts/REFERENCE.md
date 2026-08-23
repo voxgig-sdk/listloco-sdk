@@ -117,16 +117,16 @@ const localize = client.Localize()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `dictionary` | `Record<string, any>` | No |  |
-| `gates` | `Record<string, any>` | Yes |  |
-| `glossary` | `Record<string, any>` | No |  |
-| `listing` | `Record<string, any>` | Yes |  |
-| `localized` | `Record<string, any>` | Yes |  |
-| `marketplace` | `string` | Yes |  |
-| `pass` | `boolean` | Yes |  |
-| `sourceLang` | `string` | Yes |  |
-| `targetLang` | `string` | Yes |  |
-| `violations` | `any[]` | Yes |  |
+| `dictionary` | `Record<string, any>` | No | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `Record<string, any>` | Yes | Deterministic quality gate results |
+| `glossary` | `Record<string, any>` | No | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `Record<string, any>` | Yes | Product listing information to be localized |
+| `localized` | `Record<string, any>` | Yes | Localized listing content |
+| `marketplace` | `string` | Yes | Target marketplace for compliance rules. |
+| `pass` | `boolean` | Yes | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `string` | Yes | Source language code (ISO 639-1). |
+| `targetLang` | `string` | Yes | Target language code (ISO 639-1). |
+| `violations` | `any[]` | Yes | List of compliance violations if any gate failed |
 
 ### Operations
 

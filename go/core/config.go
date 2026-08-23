@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "Listloco",
+			"slug": "listloco",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -36,50 +39,60 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "dictionary",
+						"short": "Custom translation dictionary mapping source terms to target translations",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "gates",
 						"req": true,
+						"short": "Deterministic quality gate results",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "glossary",
+						"short": "Customer glossary for enforcing brand terms and model numbers",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "listing",
 						"req": true,
+						"short": "Product listing information to be localized",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "localized",
 						"req": true,
+						"short": "Localized listing content",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "marketplace",
 						"req": true,
+						"short": "Target marketplace for compliance rules.",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "pass",
 						"req": true,
+						"short": "Overall pass/fail status - true if all gates passed, false if any gate failed",
 						"type": "`$BOOLEAN`",
 					},
 					map[string]any{
 						"name": "sourceLang",
 						"req": true,
+						"short": "Source language code (ISO 639-1).",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "targetLang",
 						"req": true,
+						"short": "Target language code (ISO 639-1).",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "violations",
 						"req": true,
+						"short": "List of compliance violations if any gate failed",
 						"type": "`$ARRAY`",
 					},
 				},

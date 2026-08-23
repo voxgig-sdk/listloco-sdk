@@ -93,16 +93,16 @@ $localize = $client->Localize();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `dictionary` | `array` | No |  |
-| `gates` | `array` | Yes |  |
-| `glossary` | `array` | No |  |
-| `listing` | `array` | Yes |  |
-| `localized` | `array` | Yes |  |
-| `marketplace` | `string` | Yes |  |
-| `pass` | `bool` | Yes |  |
-| `sourceLang` | `string` | Yes |  |
-| `targetLang` | `string` | Yes |  |
-| `violations` | `array` | Yes |  |
+| `dictionary` | `array` | No | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `array` | Yes | Deterministic quality gate results |
+| `glossary` | `array` | No | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `array` | Yes | Product listing information to be localized |
+| `localized` | `array` | Yes | Localized listing content |
+| `marketplace` | `string` | Yes | Target marketplace for compliance rules. |
+| `pass` | `bool` | Yes | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `string` | Yes | Source language code (ISO 639-1). |
+| `targetLang` | `string` | Yes | Target language code (ISO 639-1). |
+| `violations` | `array` | Yes | List of compliance violations if any gate failed |
 
 ### Operations
 

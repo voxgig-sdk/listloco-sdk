@@ -88,16 +88,16 @@ localize = client.Localize()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `dictionary` | `dict` | No |  |
-| `gates` | `dict` | Yes |  |
-| `glossary` | `dict` | No |  |
-| `listing` | `dict` | Yes |  |
-| `localized` | `dict` | Yes |  |
-| `marketplace` | `str` | Yes |  |
-| `pass` | `bool` | Yes |  |
-| `sourceLang` | `str` | Yes |  |
-| `targetLang` | `str` | Yes |  |
-| `violations` | `list` | Yes |  |
+| `dictionary` | `dict` | No | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `dict` | Yes | Deterministic quality gate results |
+| `glossary` | `dict` | No | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `dict` | Yes | Product listing information to be localized |
+| `localized` | `dict` | Yes | Localized listing content |
+| `marketplace` | `str` | Yes | Target marketplace for compliance rules. |
+| `pass` | `bool` | Yes | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `str` | Yes | Source language code (ISO 639-1). |
+| `targetLang` | `str` | Yes | Target language code (ISO 639-1). |
+| `violations` | `list` | Yes | List of compliance violations if any gate failed |
 
 ### Operations
 

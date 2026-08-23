@@ -91,16 +91,16 @@ local localize = client:Localize(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `dictionary` | `table` | No |  |
-| `gates` | `table` | Yes |  |
-| `glossary` | `table` | No |  |
-| `listing` | `table` | Yes |  |
-| `localized` | `table` | Yes |  |
-| `marketplace` | `string` | Yes |  |
-| `pass` | `boolean` | Yes |  |
-| `sourceLang` | `string` | Yes |  |
-| `targetLang` | `string` | Yes |  |
-| `violations` | `table` | Yes |  |
+| `dictionary` | `table` | No | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `table` | Yes | Deterministic quality gate results |
+| `glossary` | `table` | No | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `table` | Yes | Product listing information to be localized |
+| `localized` | `table` | Yes | Localized listing content |
+| `marketplace` | `string` | Yes | Target marketplace for compliance rules. |
+| `pass` | `boolean` | Yes | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `string` | Yes | Source language code (ISO 639-1). |
+| `targetLang` | `string` | Yes | Target language code (ISO 639-1). |
+| `violations` | `table` | Yes | List of compliance violations if any gate failed |
 
 ### Operations
 

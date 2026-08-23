@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -295,16 +295,16 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `dictionary` |  |
-| `gates` |  |
-| `glossary` |  |
-| `listing` |  |
-| `localized` |  |
-| `marketplace` |  |
-| `pass` |  |
-| `sourceLang` |  |
-| `targetLang` |  |
-| `violations` |  |
+| `dictionary` | Custom translation dictionary mapping source terms to target translations |
+| `gates` | Deterministic quality gate results |
+| `glossary` | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | Product listing information to be localized |
+| `localized` | Localized listing content |
+| `marketplace` | Target marketplace for compliance rules. |
+| `pass` | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | Source language code (ISO 639-1). |
+| `targetLang` | Target language code (ISO 639-1). |
+| `violations` | List of compliance violations if any gate failed |
 
 Operations: create.
 
@@ -329,16 +329,16 @@ Create an instance: `const localize = client.Localize()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `dictionary` | `Record<string, any>` |  |
-| `gates` | `Record<string, any>` |  |
-| `glossary` | `Record<string, any>` |  |
-| `listing` | `Record<string, any>` |  |
-| `localized` | `Record<string, any>` |  |
-| `marketplace` | `string` |  |
-| `pass` | `boolean` |  |
-| `sourceLang` | `string` |  |
-| `targetLang` | `string` |  |
-| `violations` | `any[]` |  |
+| `dictionary` | `Record<string, any>` | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `Record<string, any>` | Deterministic quality gate results |
+| `glossary` | `Record<string, any>` | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `Record<string, any>` | Product listing information to be localized |
+| `localized` | `Record<string, any>` | Localized listing content |
+| `marketplace` | `string` | Target marketplace for compliance rules. |
+| `pass` | `boolean` | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `string` | Source language code (ISO 639-1). |
+| `targetLang` | `string` | Target language code (ISO 639-1). |
+| `violations` | `any[]` | List of compliance violations if any gate failed |
 
 #### Example: Create
 

@@ -230,16 +230,16 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `dictionary` |  |
-| `gates` |  |
-| `glossary` |  |
-| `listing` |  |
-| `localized` |  |
-| `marketplace` |  |
-| `pass` |  |
-| `sourceLang` |  |
-| `targetLang` |  |
-| `violations` |  |
+| `dictionary` | Custom translation dictionary mapping source terms to target translations |
+| `gates` | Deterministic quality gate results |
+| `glossary` | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | Product listing information to be localized |
+| `localized` | Localized listing content |
+| `marketplace` | Target marketplace for compliance rules. |
+| `pass` | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | Source language code (ISO 639-1). |
+| `targetLang` | Target language code (ISO 639-1). |
+| `violations` | List of compliance violations if any gate failed |
 
 Operations: Create.
 
@@ -264,16 +264,16 @@ Create an instance: `local localize = client:Localize(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `dictionary` | `table` |  |
-| `gates` | `table` |  |
-| `glossary` | `table` |  |
-| `listing` | `table` |  |
-| `localized` | `table` |  |
-| `marketplace` | `string` |  |
-| `pass` | `boolean` |  |
-| `sourceLang` | `string` |  |
-| `targetLang` | `string` |  |
-| `violations` | `table` |  |
+| `dictionary` | `table` | Custom translation dictionary mapping source terms to target translations |
+| `gates` | `table` | Deterministic quality gate results |
+| `glossary` | `table` | Customer glossary for enforcing brand terms and model numbers |
+| `listing` | `table` | Product listing information to be localized |
+| `localized` | `table` | Localized listing content |
+| `marketplace` | `string` | Target marketplace for compliance rules. |
+| `pass` | `boolean` | Overall pass/fail status - true if all gates passed, false if any gate failed |
+| `sourceLang` | `string` | Source language code (ISO 639-1). |
+| `targetLang` | `string` | Target language code (ISO 639-1). |
+| `violations` | `table` | List of compliance violations if any gate failed |
 
 #### Example: Create
 
