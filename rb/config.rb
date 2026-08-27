@@ -28,6 +28,7 @@ module ListlocoConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
