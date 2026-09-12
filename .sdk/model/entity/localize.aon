@@ -75,8 +75,10 @@ main: kit: entity: localize: {
         {
           method: "POST"
           orig: "/localize"
-          parts: [
-            "localize"
+          segments: [
+            {
+              lit: "localize"
+            }
           ]
           transform: {
             req: "`reqdata`"

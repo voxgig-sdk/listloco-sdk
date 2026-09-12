@@ -130,13 +130,18 @@ class ListlocoConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/localize',
-                  'parts' => [
-                    'localize',
+                  'segments' => [
+                    [
+                      'lit' => 'localize',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'localize',
                   ],
                 ],
               ],
