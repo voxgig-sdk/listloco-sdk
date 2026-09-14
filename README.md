@@ -114,7 +114,7 @@ local result, err = client:Localize():create({ gates = {}, listing = {}, localiz
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
+| TypeScript | `@voxgig-sdk/listloco-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
 | Python | `voxgig-sdk-listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
 | PHP | `voxgig-sdk/listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/listloco-sdk/go` | `go get github.com/voxgig-sdk/listloco-sdk/go@latest` |
@@ -128,7 +128,7 @@ local result, err = client:Localize():create({ gates = {}, listing = {}, localiz
 ### TypeScript
 
 ```ts
-import { ListlocoSDK } from '@voxgig-sdk/listloco'
+import { ListlocoSDK } from '@voxgig-sdk/listloco-sdk'
 
 const client = new ListlocoSDK({
   apikey: process.env.LISTLOCO_APIKEY,

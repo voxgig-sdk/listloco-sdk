@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { ListlocoSDK } from '@voxgig-sdk/listloco'
+import { ListlocoSDK } from '@voxgig-sdk/listloco-sdk'
 
 const client = new ListlocoSDK({
   apikey: process.env.LISTLOCO_APIKEY,
@@ -438,7 +438,7 @@ listloco/
 Import the SDK from the package root:
 
 ```ts
-import { ListlocoSDK } from '@voxgig-sdk/listloco'
+import { ListlocoSDK } from '@voxgig-sdk/listloco-sdk'
 ```
 
 ### Entity state
