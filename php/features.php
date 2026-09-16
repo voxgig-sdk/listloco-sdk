@@ -4,7 +4,10 @@ declare(strict_types=1);
 // Listloco SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class ListlocoFeatures
@@ -14,8 +17,14 @@ class ListlocoFeatures
         switch ($name) {
             case "base":
                 return new ListlocoBaseFeature();
+            case "ratelimit":
+                return new ListlocoRatelimitFeature();
+            case "retry":
+                return new ListlocoRetryFeature();
             case "test":
                 return new ListlocoTestFeature();
+            case "timeout":
+                return new ListlocoTimeoutFeature();
             default:
                 return new ListlocoBaseFeature();
         }
@@ -31,7 +40,10 @@ class ListlocoFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

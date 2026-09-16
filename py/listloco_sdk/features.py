@@ -1,12 +1,18 @@
 # Listloco SDK feature factory
 
 from listloco_sdk.feature.base_feature import ListlocoBaseFeature
+from listloco_sdk.feature.ratelimit_feature import ListlocoRatelimitFeature
+from listloco_sdk.feature.retry_feature import ListlocoRetryFeature
 from listloco_sdk.feature.test_feature import ListlocoTestFeature
+from listloco_sdk.feature.timeout_feature import ListlocoTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: ListlocoBaseFeature(),
+    "ratelimit": lambda: ListlocoRatelimitFeature(),
+    "retry": lambda: ListlocoRetryFeature(),
     "test": lambda: ListlocoTestFeature(),
+    "timeout": lambda: ListlocoTimeoutFeature(),
 }
 
 
