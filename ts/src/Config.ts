@@ -131,9 +131,9 @@ class Config {
 
     entity: {
       
-      localize: {
-      },
-
+        localize: {
+        },
+  
     }
   }
 

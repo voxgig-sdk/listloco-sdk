@@ -114,12 +114,12 @@ local result, err = client:Localize():create({ gates = {}, listing = {}, localiz
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/listloco-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
-| Python | `voxgig-sdk-listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
-| PHP | `voxgig-sdk/listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
+| TypeScript | `@voxgig-sdk/listloco-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/tags) |
+| Python | `voxgig-sdk-listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/tags) |
+| PHP | `voxgig-sdk/listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/listloco-sdk/go` | `go get github.com/voxgig-sdk/listloco-sdk/go@latest` |
-| Ruby | `voxgig-sdk-listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
-| Lua | `voxgig-sdk-listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/releases) |
+| Ruby | `voxgig-sdk-listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/tags) |
+| Lua | `voxgig-sdk-listloco` | publish pending — [install from git tag](https://github.com/voxgig-sdk/listloco-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/listloco-sdk/go-cli` | `go install github.com/voxgig-sdk/listloco-sdk/go-cli/cmd/listloco@latest` |
 | Go MCP server | `github.com/voxgig-sdk/listloco-sdk/go-mcp` | `go get github.com/voxgig-sdk/listloco-sdk/go-mcp@latest` |
 
