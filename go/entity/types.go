@@ -1,7 +1,7 @@
 // Typed models for the Listloco SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,16 +14,6 @@ import (
 
 // Localize is the typed data model for the localize entity.
 type Localize struct {
-	Dictionary *map[string]any `json:"dictionary,omitempty"`
-	Gates map[string]any `json:"gates"`
-	Glossary *map[string]any `json:"glossary,omitempty"`
-	Listing map[string]any `json:"listing"`
-	Localized map[string]any `json:"localized"`
-	Marketplace string `json:"marketplace"`
-	Pass bool `json:"pass"`
-	SourceLang string `json:"sourceLang"`
-	TargetLang string `json:"targetLang"`
-	Violations []any `json:"violations"`
 }
 
 // LocalizeCreateData is the typed request payload for Localize.CreateTyped.

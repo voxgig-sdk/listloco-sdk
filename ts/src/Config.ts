@@ -16,12 +16,6 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
-// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
-// the model's active plugin groups. A feature that takes a `plugins` option
-// (secrets over sekreto) reads its own entry; a feature with no plugins has
-// none. Named imports above make each definition statically reachable, so
-// an SDK carries exactly the plugin modules its model selects — the same
-// leanness the old side-effect registry imports bought, without a registry.
 const FEATURE_PLUGINS: Record<string, any[]> = {
   
 }
@@ -32,7 +26,6 @@ class Config {
   makeFeature(this: any, fn: string) {
     const fc = FEATURE_CLASS[fn]
     const fi = new fc()
-    // TODO: errors etc
     return fi
   }
 
@@ -143,61 +136,71 @@ class Config {
       "fields": [
         {
           "name": "dictionary",
-          "short": "Custom translation dictionary mapping source terms to target translations",
-          "type": "`$OBJECT`"
+          "title": "Dictionary",
+          "type": "`$OBJECT`",
+          "short": "Custom translation dictionary mapping source terms to target translations"
         },
         {
           "name": "gates",
+          "title": "Gates",
+          "type": "`$OBJECT`",
           "req": true,
-          "short": "Deterministic quality gate results",
-          "type": "`$OBJECT`"
+          "short": "Deterministic quality gate results"
         },
         {
           "name": "glossary",
-          "short": "Customer glossary for enforcing brand terms and model numbers",
-          "type": "`$OBJECT`"
+          "title": "Glossary",
+          "type": "`$OBJECT`",
+          "short": "Customer glossary for enforcing brand terms and model numbers"
         },
         {
           "name": "listing",
+          "title": "Listing",
+          "type": "`$OBJECT`",
           "req": true,
-          "short": "Product listing information to be localized",
-          "type": "`$OBJECT`"
+          "short": "Product listing information to be localized"
         },
         {
           "name": "localized",
+          "title": "Localized",
+          "type": "`$OBJECT`",
           "req": true,
-          "short": "Localized listing content",
-          "type": "`$OBJECT`"
+          "short": "Localized listing content"
         },
         {
           "name": "marketplace",
+          "title": "Marketplace",
+          "type": "`$STRING`",
           "req": true,
-          "short": "Target marketplace for compliance rules.",
-          "type": "`$STRING`"
+          "short": "Target marketplace for compliance rules."
         },
         {
           "name": "pass",
+          "title": "Pass",
+          "type": "`$BOOLEAN`",
           "req": true,
-          "short": "Overall pass/fail status - true if all gates passed, false if any gate failed",
-          "type": "`$BOOLEAN`"
+          "short": "Overall pass/fail status - true if all gates passed, false if any gate failed"
         },
         {
           "name": "sourceLang",
+          "title": "Source Lang",
+          "type": "`$STRING`",
           "req": true,
-          "short": "Source language code (ISO 639-1).",
-          "type": "`$STRING`"
+          "short": "Source language code (ISO 639-1)."
         },
         {
           "name": "targetLang",
+          "title": "Target Lang",
+          "type": "`$STRING`",
           "req": true,
-          "short": "Target language code (ISO 639-1).",
-          "type": "`$STRING`"
+          "short": "Target language code (ISO 639-1)."
         },
         {
           "name": "violations",
+          "title": "Violations",
+          "type": "`$ARRAY`",
           "req": true,
-          "short": "List of compliance violations if any gate failed",
-          "type": "`$ARRAY`"
+          "short": "List of compliance violations if any gate failed"
         }
       ],
       "name": "localize",
@@ -207,7 +210,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "args": {},
               "kind": "http",
               "method": "POST",
               "orig": "/localize",
@@ -216,14 +218,16 @@ class Config {
                   "lit": "localize"
                 }
               ],
-              "select": {},
+              "parts": [
+                "localize"
+              ],
+              "rename": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
               },
-              "parts": [
-                "localize"
-              ]
+              "args": {},
+              "select": {}
             }
           ]
         }

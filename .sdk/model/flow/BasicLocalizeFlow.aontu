@@ -1,0 +1,18 @@
+# BasicLocalizeFlow
+
+main: kit: flow: BasicLocalizeFlow:
+{
+  entity: "localize",
+  kind: "basic",
+  name: "BasicLocalizeFlow",
+  step: [
+    {
+      i: {
+        ref: "localize_ref01"
+      }
+
+      o: "create"
+    }
+  ],
+  "key$": "BasicLocalizeFlow"
+}

@@ -1,0 +1,109 @@
+# Entity: localize
+
+main: kit: entity: localize: {
+
+  alias: field: {}
+
+  fields: {
+    dictionary: {
+      h: "Dictionary"
+      n: "dictionary"
+      r: false
+      sh: "Custom translation dictionary mapping source terms to target translations"
+      t: "`$OBJECT`"
+    }
+    gates: {
+      h: "Gates"
+      n: "gates"
+      r: true
+      sh: "Deterministic quality gate results"
+      t: "`$OBJECT`"
+    }
+    glossary: {
+      h: "Glossary"
+      n: "glossary"
+      r: false
+      sh: "Customer glossary for enforcing brand terms and model numbers"
+      t: "`$OBJECT`"
+    }
+    listing: {
+      h: "Listing"
+      n: "listing"
+      r: true
+      sh: "Product listing information to be localized"
+      t: "`$OBJECT`"
+    }
+    localized: {
+      h: "Localized"
+      n: "localized"
+      r: true
+      sh: "Localized listing content"
+      t: "`$OBJECT`"
+    }
+    marketplace: {
+      h: "Marketplace"
+      n: "marketplace"
+      r: true
+      sh: "Target marketplace for compliance rules."
+      t: "`$STRING`"
+    }
+    pass: {
+      h: "Pass"
+      n: "pass"
+      r: true
+      sh: "Overall pass/fail status - true if all gates passed, false if any gate failed"
+      t: "`$BOOLEAN`"
+    }
+    sourceLang: {
+      h: "Source Lang"
+      n: "sourceLang"
+      r: true
+      sh: "Source language code (ISO 639-1)."
+      t: "`$STRING`"
+    }
+    targetLang: {
+      h: "Target Lang"
+      n: "targetLang"
+      r: true
+      sh: "Target language code (ISO 639-1)."
+      t: "`$STRING`"
+    }
+    violations: {
+      h: "Violations"
+      n: "violations"
+      r: true
+      sh: "List of compliance violations if any gate failed"
+      t: "`$ARRAY`"
+    }
+  }
+
+  name: "localize"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /localize"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/localize"
+          s: [
+            {
+              lit: "localize"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}
