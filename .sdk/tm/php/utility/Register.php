@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 ListlocoUtility::setRegistrar(function (ListlocoUtility $u): void {
     $u->clean = [ListlocoClean::class, 'call'];
+    $u->clean_add = [ListlocoClean::class, 'add'];
+    $u->clean_explain = [ListlocoDone::class, 'clean_explain'];
     $u->done = [ListlocoDone::class, 'call'];
     $u->make_error = [ListlocoMakeError::class, 'call'];
     $u->feature_add = [ListlocoFeatureAdd::class, 'call'];

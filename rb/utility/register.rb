@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 ListlocoUtility.registrar = ->(u) {
   u.clean = ListlocoUtilities::Clean
+  u.clean_add = ListlocoUtilities::CleanAdd
+  u.clean_explain = ListlocoUtilities::CleanExplain
   u.done = ListlocoUtilities::Done
   u.make_error = ListlocoUtilities::MakeError
   u.feature_add = ListlocoUtilities::FeatureAdd
