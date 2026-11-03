@@ -58,43 +58,27 @@ Localize = Struct.new(
 # @!attribute [rw] dictionary
 #   @return [Hash, nil]
 #
-# @!attribute [rw] gates
-#   @return [Hash]
-#
 # @!attribute [rw] glossary
 #   @return [Hash, nil]
 #
 # @!attribute [rw] listing
 #   @return [Hash]
 #
-# @!attribute [rw] localized
-#   @return [Hash]
-#
 # @!attribute [rw] marketplace
 #   @return [String]
-#
-# @!attribute [rw] pass
-#   @return [Boolean]
 #
 # @!attribute [rw] sourceLang
 #   @return [String]
 #
 # @!attribute [rw] targetLang
 #   @return [String]
-#
-# @!attribute [rw] violations
-#   @return [Array]
 LocalizeCreateData = Struct.new(
   :dictionary,
-  :gates,
   :glossary,
   :listing,
-  :localized,
   :marketplace,
-  :pass,
   :sourceLang,
   :targetLang,
-  :violations,
   keyword_init: true
 )
 

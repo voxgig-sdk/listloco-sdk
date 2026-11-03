@@ -9,9 +9,19 @@ import pytest
 from listloco_sdk.utility.voxgig_struct import voxgig_struct as vs
 from listloco_sdk import ListlocoSDK
 from listloco_sdk.core import helpers
+from listloco_sdk.config import shared_config
+from listloco_sdk.feature.base_feature import ListlocoBaseFeature
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
+
+
+
+# main.kit.test.live.strict is true (the default is true): a live
+# request that fails, or a live test missing an input it needs,
+# fails the test.
+# An account with no record for a test to read skips it either way.
+LIVE_STRICT = True
 
 
 class TestLocalizeEntity:
@@ -20,6 +30,15 @@ class TestLocalizeEntity:
         testsdk = ListlocoSDK.test(None, None)
         ent = testsdk.Localize(None)
         assert ent is not None
+
+    def test_should_refuse_an_invalid_request(self):
+        if "validate" not in (shared_config().get("feature") or {}):
+            pytest.skip("feature not present in this SDK: validate")
+        client = ListlocoSDK.test(
+            None, {"feature": {"validate": {"active": True}}})
+        with pytest.raises(Exception) as err:
+            client.Localize(None).create({"listing": "x", "marketplace": 1, "sourceLang": "x", "targetLang": "x"}, None)
+        assert "validate_failed" == getattr(err.value, "code", None)
 
     def test_should_run_basic_flow(self):
         setup = _localize_basic_setup(None)
@@ -32,11 +51,10 @@ class TestLocalizeEntity:
             if _skip:
                 pytest.skip(_reason or "skipped via sdk-test-control.json")
                 return
-        # The basic flow consumes synthetic IDs from the fixture. In live mode
-        # without an *_ENTID env override, those IDs hit the live API and 4xx.
-        if setup.get("synthetic_only"):
-            pytest.skip("live entity test uses synthetic IDs from fixture — "
-                        "set LISTLOCO_TEST_LOCALIZE_ENTID JSON to run live")
+        if setup["live"] and os.environ.get("VOXGIG_GETONLY_GUARD") == "TRUE":
+            print("LIVE STEP {\"id\":\"localize.create.0\",\"state\":\"excluded\",\"attempted\":false,\"reason\":\"GET-only live run: needs POST /localize\"}")
+            pytest.skip("Live coverage incomplete: localize.create.0 excluded (GET-only live run: needs POST /localize)")
+
         client = setup["client"]
 
         # CREATE
@@ -53,7 +71,7 @@ def _localize_basic_setup(extra):
     runner.load_env_local()
 
     entity_data_file = os.path.join(_TEST_DIR, "../../.sdk/test/entity/localize/LocalizeTestData.json")
-    with open(entity_data_file, "r") as f:
+    with open(entity_data_file, "r", encoding="utf-8") as f:
         entity_data_source = f.read()
 
     entity_data = json.loads(entity_data_source)
@@ -74,9 +92,8 @@ def _localize_basic_setup(extra):
         }
     )
 
-    # Detect ENTID env override before envOverride consumes it. When live
-    # mode is on without a real override, the basic test runs against synthetic
-    # IDs from the fixture and 4xx's. We surface this so the test can skip.
+    # Whether *_ENTID supplied the idmap, read before env_override consumes
+    # it: without it, the ids a live flow binds are the fixture's synthetic ones.
     _entid_env_raw = os.environ.get(
         "LISTLOCO_TEST_LOCALIZE_ENTID")
     _idmap_overridden = _entid_env_raw is not None and _entid_env_raw.strip().startswith("{")

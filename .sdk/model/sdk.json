@@ -186,6 +186,14 @@
               "points": [
                 {
                   "a": true,
+                  "bf": [
+                    "dictionary",
+                    "glossary",
+                    "listing",
+                    "marketplace",
+                    "sourceLang",
+                    "targetLang"
+                  ],
                   "co": {
                     "id": "POST /localize",
                     "source": "openapi3",
@@ -197,6 +205,10 @@
                   "o": "/localize",
                   "q": {},
                   "r": {},
+                  "rs": {
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "localize"
@@ -537,6 +549,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -655,6 +668,17 @@
         "description": "The ListLoco API localizes e-commerce product listings into marketplace-compliant and glossary-consistent text, primarily for Amazon. It verifies each listing through a deterministic quality gate to ensure compliance and accuracy in translation, from English to German.",
         "meta_source": "https://www.freepublicapis.com",
         "security": {
+          "alternatives": [
+            [
+              {
+                "in": "header",
+                "name": "X-RapidAPI-Key",
+                "prefix": "",
+                "scheme": "RapidAPIAuth",
+                "type": "apiKey"
+              }
+            ]
+          ],
           "in": "header",
           "name": "Authorization",
           "prefix": "Bearer",
@@ -687,7 +711,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -740,6 +764,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -970,7 +999,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -1347,6 +1379,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

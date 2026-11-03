@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/listloco-sdk/releases)), or
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/listloco-sdk/tags)), or
 from a clone as a Composer path repository:
 
 ```bash
@@ -42,7 +42,7 @@ $client = new ListlocoSDK([
 
 ```php
 // create() returns the ENTITY — call data_get() for the created Localize record.
-$created = $client->Localize()->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example_marketplace", "pass" => true, "sourceLang" => "example_sourceLang", "targetLang" => "example_targetLang", "violations" => []]);
+$created = $client->Localize()->create(["listing" => [], "marketplace" => "example_marketplace", "sourceLang" => "example_sourceLang", "targetLang" => "example_targetLang"]);
 
 ```
 
@@ -54,7 +54,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $localize = $client->Localize()->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => []]);
+    $localize = $client->Localize()->create(["listing" => [], "marketplace" => "example", "sourceLang" => "example", "targetLang" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -128,7 +128,7 @@ $client = ListlocoSDK::test();
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$localize = $client->Localize()->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => []]);
+$localize = $client->Localize()->create(["listing" => [], "marketplace" => "example", "sourceLang" => "example", "targetLang" => "example"]);
 print_r($localize->data_get());
 ```
 
@@ -218,7 +218,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
+| `create` | `($reqdata, $ctrl): mixed` | Create a new entity, and return it. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -228,9 +228,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -299,14 +299,10 @@ Create an instance: `$localize = $client->Localize();`
 
 ```php
 $localize = $client->Localize()->create([
-    "gates" => null, // array
     "listing" => null, // array
-    "localized" => null, // array
     "marketplace" => null, // string
-    "pass" => null, // bool
     "sourceLang" => null, // string
     "targetLang" => null, // string
-    "violations" => null, // array
 ]);
 ```
 
@@ -473,7 +469,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $localize = $client->Localize();
-$localize->create(["gates" => [], "listing" => [], "localized" => [], "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => []]);
+$localize->create(["listing" => [], "marketplace" => "example", "sourceLang" => "example", "targetLang" => "example"]);
 
 // $localize->data_get() now returns the localize data from the last create
 // $localize->match_get() returns the last match criteria

@@ -13,7 +13,12 @@ type Context = core.Context
 type Utility = core.Utility
 type Feature = core.Feature
 type Entity = core.Entity
-type ListlocoEntity = core.ListlocoEntity
+type ListlocoEntityBase = core.ListlocoEntityBase
+
+// Deprecated: use ListlocoEntityBase.
+type ListlocoEntity = core.ListlocoEntityBase
+
+type StreamItem = core.StreamItem
 type FetcherFunc = core.FetcherFunc
 type Spec = core.Spec
 type Result = core.Result
@@ -41,7 +46,7 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
-	core.NewLocalizeEntityFunc = func(client *core.ListlocoSDK, entopts map[string]any) core.ListlocoEntity {
+	core.NewLocalizeEntityFunc = func(client *core.ListlocoSDK, entopts map[string]any) core.ListlocoEntityBase {
 		return entity.NewLocalizeEntity(client, entopts)
 	}
 }

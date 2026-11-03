@@ -31,14 +31,10 @@ class Localize
 class LocalizeCreateData
 {
     public ?array $dictionary = null;
-    public array $gates;
     public ?array $glossary = null;
     public array $listing;
-    public array $localized;
     public string $marketplace;
-    public bool $pass;
     public string $sourceLang;
     public string $targetLang;
-    public array $violations;
 }
 

@@ -109,18 +109,14 @@ localize = client.Localize
 
 #### `create(reqdata, ctrl = nil) -> result`
 
-Create a new entity with the given data. Raises on error.
+Create a new entity with the given data. Returns the created entity and raises on error.
 
 ```ruby
 result = client.Localize.create({
-  "gates" => {}, # Hash
   "listing" => {}, # Hash
-  "localized" => {}, # Hash
   "marketplace" => "example_marketplace", # String
-  "pass" => true, # Boolean
   "sourceLang" => "example_sourceLang", # String
   "targetLang" => "example_targetLang", # String
-  "violations" => [], # Array
 })
 ```
 
@@ -311,6 +307,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

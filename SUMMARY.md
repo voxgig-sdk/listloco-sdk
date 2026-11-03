@@ -41,7 +41,7 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 
 The default credential is sent in the `Authorization` header with the `Bearer` prefix.
 
-Bearer token authentication for direct/self-hosted deployments. Use Authorization: Bearer &lt;YOUR_API_KEY&gt; header.
+Bearer token authentication for direct/self-hosted deployments. Use Authorization: Bearer &lt;`YOUR_API_KEY`&gt; header.
 
 RapidAPI key authentication. Requires both X-RapidAPI-Key and X-RapidAPI-Host headers.
 

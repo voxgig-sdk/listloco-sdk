@@ -3,5 +3,20 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "Bearer token authentication for direct/self-hosted deployments. Use Authorization: Bearer &lt;`YOUR_API_KEY`&gt; header.",
+      "Custom translation dictionary mapping source terms to target translations",
+      "Deterministic quality gate results",
+      "Glossary consistency check",
+      "Localized listing content",
+      "Product listing information to be localized",
+      "Production server (direct/self-hosted)",
+      "RapidAPI key authentication. Requires both X-RapidAPI-Key and X-RapidAPI-Host headers.",
+      "RapidAPI server",
+      "Successful localization with quality gate results",
+      "The ListLoco API localizes e-commerce product listings into marketplace-compliant and glossary-consistent text, primarily for Amazon. It verifies each listing through a deterministic quality gate to ensure compliance and accuracy in translation, from English to German."
+    ]
+  }
 }

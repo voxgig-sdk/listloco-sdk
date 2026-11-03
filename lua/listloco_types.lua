@@ -20,15 +20,11 @@
 
 ---@class LocalizeCreateData
 ---@field dictionary? table
----@field gates table
 ---@field glossary? table
 ---@field listing table
----@field localized table
 ---@field marketplace string
----@field pass boolean
 ---@field sourceLang string
 ---@field targetLang string
----@field violations table
 
 local M = {}
 

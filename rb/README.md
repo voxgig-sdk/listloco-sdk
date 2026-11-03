@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/listloco-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/listloco-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -45,7 +45,7 @@ client = ListlocoSDK.new({
 
 ```ruby
 # create returns the ENTITY — call data_get for the created Localize record.
-created = client.Localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example_marketplace", "pass" => true, "sourceLang" => "example_sourceLang", "targetLang" => "example_targetLang", "violations" => [] })
+created = client.Localize.create({ "listing" => {}, "marketplace" => "example_marketplace", "sourceLang" => "example_sourceLang", "targetLang" => "example_targetLang" })
 
 ```
 
@@ -56,7 +56,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  localize = client.Localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => [] })
+  localize = client.Localize.create({ "listing" => {}, "marketplace" => "example", "sourceLang" => "example", "targetLang" => "example" })
 rescue => err
   warn "create failed: #{err}"
 end
@@ -125,9 +125,9 @@ Create a mock client for unit testing — no server required:
 client = ListlocoSDK.test
 
 # Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
-localize = client.Localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => [] })
-puts localize
+# data_get reads its mock record.
+localize = client.Localize.create({ "listing" => {}, "marketplace" => "example", "sourceLang" => "example", "targetLang" => "example" })
+puts localize.data_get
 ```
 
 ### Use a custom fetch function
@@ -213,7 +213,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `create` | `(reqdata, ctrl) -> any` | Create a new entity, and return it. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -223,9 +223,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `ListlocoError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`ListlocoError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -293,14 +294,10 @@ Create an instance: `localize = client.Localize`
 
 ```ruby
 localize = client.Localize.create({
-  "gates" => {}, # Hash
   "listing" => {}, # Hash
-  "localized" => {}, # Hash
   "marketplace" => "example_marketplace", # String
-  "pass" => true, # Boolean
   "sourceLang" => "example_sourceLang", # String
   "targetLang" => "example_targetLang", # String
-  "violations" => [], # Array
 })
 ```
 
@@ -467,7 +464,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 localize = client.Localize
-localize.create({ "gates" => {}, "listing" => {}, "localized" => {}, "marketplace" => "example", "pass" => true, "sourceLang" => "example", "targetLang" => "example", "violations" => [] })
+localize.create({ "listing" => {}, "marketplace" => "example", "sourceLang" => "example", "targetLang" => "example" })
 
 # localize.data_get now returns the localize data from the last create
 # localize.match_get returns the last match criteria

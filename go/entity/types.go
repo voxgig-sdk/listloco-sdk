@@ -19,15 +19,11 @@ type Localize struct {
 // LocalizeCreateData is the typed request payload for Localize.CreateTyped.
 type LocalizeCreateData struct {
 	Dictionary *map[string]any `json:"dictionary,omitempty"`
-	Gates map[string]any `json:"gates"`
 	Glossary *map[string]any `json:"glossary,omitempty"`
 	Listing map[string]any `json:"listing"`
-	Localized map[string]any `json:"localized"`
 	Marketplace string `json:"marketplace"`
-	Pass bool `json:"pass"`
 	SourceLang string `json:"sourceLang"`
 	TargetLang string `json:"targetLang"`
-	Violations []any `json:"violations"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

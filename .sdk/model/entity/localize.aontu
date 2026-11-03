@@ -83,6 +83,14 @@ main: kit: entity: localize: {
       name: "create"
       points: [
         {
+          bf: [
+            "dictionary"
+            "glossary"
+            "listing"
+            "marketplace"
+            "sourceLang"
+            "targetLang"
+          ]
           co: {
             id: "POST /localize"
             source: "openapi3"
@@ -90,6 +98,10 @@ main: kit: entity: localize: {
           }
           m: "POST"
           o: "/localize"
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               lit: "localize"

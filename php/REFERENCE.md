@@ -108,18 +108,14 @@ $localize = $client->Localize();
 
 #### `create(array $reqdata, ?array $ctrl = null): mixed`
 
-Create a new entity with the given data. Throws on error.
+Create a new entity with the given data. Returns the created entity and throws on error.
 
 ```php
 $result = $client->Localize()->create([
-  "gates" => null, // array
   "listing" => null, // array
-  "localized" => null, // array
   "marketplace" => null, // string
-  "pass" => null, // bool
   "sourceLang" => null, // string
   "targetLang" => null, // string
-  "violations" => null, // array
 ]);
 ```
 
@@ -310,6 +306,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

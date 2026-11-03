@@ -16,29 +16,32 @@ from __future__ import annotations
 from typing import TypedDict, Any
 
 
-class LocalizeRequired(TypedDict):
-    gates: dict
-    listing: dict
-    localized: dict
-    marketplace: str
-    sourceLang: str
-    targetLang: str
-    violations: list
+LocalizeRequired = TypedDict('LocalizeRequired', {
+    "gates": dict,
+    "listing": dict,
+    "localized": dict,
+    "marketplace": str,
+    "pass": bool,
+    "sourceLang": str,
+    "targetLang": str,
+    "violations": list,
+})
+
+LocalizeOptional = TypedDict('LocalizeOptional', {
+    "dictionary": dict,
+    "glossary": dict,
+}, total=False)
 
 
-class Localize(LocalizeRequired, total=False):
-    dictionary: dict
-    glossary: dict
+class Localize(LocalizeRequired, LocalizeOptional):
+    pass
 
 
 class LocalizeCreateDataRequired(TypedDict):
-    gates: dict
     listing: dict
-    localized: dict
     marketplace: str
     sourceLang: str
     targetLang: str
-    violations: list
 
 
 class LocalizeCreateData(LocalizeCreateDataRequired, total=False):

@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/listloco-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/listloco-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/listloco-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -54,11 +55,11 @@ func main() {
     })
 
     // Create a localize.
-    created, err := client.Localize(nil).Create(map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example_marketplace", "pass": true, "sourceLang": "example_sourceLang", "targetLang": "example_targetLang", "violations": []any{}}, nil)
+    created, err := client.Localize(nil).Create(map[string]any{"listing": map[string]any{}, "marketplace": "example_marketplace", "sourceLang": "example_sourceLang", "targetLang": "example_targetLang"}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(created)
+    fmt.Println(created.(sdk.Entity).Data())
 }
 ```
 
@@ -69,7 +70,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-localize, err := client.Localize(nil).Create(map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "sourceLang": "example", "targetLang": "example", "violations": []any{}}, nil)
+localize, err := client.Localize(nil).Create(map[string]any{"listing": map[string]any{}, "marketplace": "example", "sourceLang": "example", "targetLang": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -139,12 +140,12 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 localize, err := client.Localize(nil).Create(
-    map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "sourceLang": "example", "targetLang": "example", "violations": []any{}}, nil,
+    map[string]any{"listing": map[string]any{}, "marketplace": "example", "sourceLang": "example", "targetLang": "example"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(localize) // the returned mock data
+fmt.Println(localize.(sdk.Entity).Data()) // the entity's mock record
 ```
 
 ### Use a custom fetch function
@@ -223,15 +224,15 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Localize` | `(data map[string]any) ListlocoEntity` | Create a Localize entity instance. |
+| `Localize` | `(data map[string]any) ListlocoEntityBase` | Create a Localize entity instance. |
 
-### Entity interface (ListlocoEntity)
+### Entity interface (ListlocoEntityBase)
 
-All entities implement the `ListlocoEntity` interface.
+All entities implement the `ListlocoEntityBase` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
+| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity, and return it. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -239,12 +240,12 @@ All entities implement the `ListlocoEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Create` | the entity record (`map[string]any`) |
+| `Create` | the entity, whose `Data()` reads its record (`map[string]any`) |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
@@ -252,7 +253,7 @@ slice):
 
     localize, err := client.Localize(nil).Create(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // localize is the returned record
+    // localize is the entity; localize.(sdk.Entity).Data() reads its record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -312,19 +313,15 @@ Create an instance: `localize := client.Localize(nil)`
 
 ```go
 result, err := client.Localize(nil).Create(map[string]any{
-    "gates": map[string]any{},
     "listing": map[string]any{},
-    "localized": map[string]any{},
     "marketplace": "example_marketplace",
-    "pass": true,
     "sourceLang": "example_sourceLang",
     "targetLang": "example_targetLang",
-    "violations": []any{},
 }, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(result)
+fmt.Println(result.(sdk.Entity).Data()) // the created entity's record
 ```
 
 ## Features
@@ -461,7 +458,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 
@@ -486,7 +485,7 @@ stores the returned data and match criteria internally.
 
 ```go
 localize := client.Localize(nil)
-localize.Create(map[string]any{"gates": map[string]any{}, "listing": map[string]any{}, "localized": map[string]any{}, "marketplace": "example", "pass": true, "sourceLang": "example", "targetLang": "example", "violations": []any{}}, nil)
+localize.Create(map[string]any{"listing": map[string]any{}, "marketplace": "example", "sourceLang": "example", "targetLang": "example"}, nil)
 
 // localize.Data() now returns the localize data from the last create
 // localize.Match() returns the last match criteria

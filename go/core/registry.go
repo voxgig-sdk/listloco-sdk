@@ -12,5 +12,5 @@ var NewTestFeatureFunc func() Feature
 
 var NewTimeoutFeatureFunc func() Feature
 
-var NewLocalizeEntityFunc func(client *ListlocoSDK, entopts map[string]any) ListlocoEntity
+var NewLocalizeEntityFunc func(client *ListlocoSDK, entopts map[string]any) ListlocoEntityBase
 

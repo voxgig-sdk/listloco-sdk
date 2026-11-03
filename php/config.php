@@ -93,6 +93,7 @@ class ListlocoConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -208,6 +209,10 @@ class ListlocoConfig
                   ],
                   'args' => [],
                   'select' => [],
+                  'response' => [
+                    'kind' => 'json',
+                    'media' => 'application/json',
+                  ],
                 ],
               ],
             ],
